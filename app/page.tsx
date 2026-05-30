@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AegisLogo from "@/components/AegisLogo";
 
 const STATS = [
   { value: "$40B", label: "projected AI-fraud losses by 2027" },
@@ -10,8 +11,21 @@ const STATS = [
 export default function Home() {
   return (
     <main className="min-h-screen">
+      {/* Top nav */}
+      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+        <AegisLogo size={30} />
+        <a
+          href="https://github.com/TUMO-MOGAME/Beyond-Tomorrow-Summit-AI-Future-Tech-Ecosystem-"
+          target="_blank"
+          rel="noreferrer"
+          className="text-sm text-slate-400 transition hover:text-white"
+        >
+          GitHub ↗
+        </a>
+      </nav>
+
       {/* Hero */}
-      <section className="mx-auto max-w-5xl px-6 pt-24 pb-16 text-center">
+      <section className="mx-auto max-w-5xl px-6 pt-16 pb-16 text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-aegis-border bg-aegis-panel px-4 py-1.5 text-sm text-blue-300">
           🛡️ Beyond Tomorrow Summit 2026 · Cybersecurity × Fintech × Health
         </div>

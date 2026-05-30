@@ -9,6 +9,7 @@ import VerdictBanner from "@/components/VerdictBanner";
 import TranscriptFeed, { type FeedLine } from "@/components/TranscriptFeed";
 import TransactionShield, { type ShieldState } from "@/components/TransactionShield";
 import TrustedCircle, { type AlertState } from "@/components/TrustedCircle";
+import AegisLogo from "@/components/AegisLogo";
 
 interface AnalyzeResult {
   provider: string;
@@ -27,6 +28,7 @@ const DANGER_THRESHOLD = 75; // risk score that triggers intervention
 // Which fixtures involve a money transfer (show the Transaction Shield).
 const MONEY_FIXTURES = new Set([
   "grandparent-scam",
+  "spanish-grandparent-scam",
   "bank-impersonation",
   "romance-pig-butchering",
 ]);
@@ -176,8 +178,8 @@ export default function Guardian() {
     <main className="mx-auto max-w-7xl px-6 py-8">
       {/* header */}
       <div className="mb-6 flex items-center justify-between">
-        <Link href="/" className="text-sm text-slate-400 hover:text-white">
-          ← Aegis
+        <Link href="/" className="transition hover:opacity-80">
+          <AegisLogo size={26} />
         </Link>
         <div className="flex gap-1 rounded-lg border border-aegis-border bg-aegis-panel p-1">
           <button

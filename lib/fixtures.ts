@@ -1,4 +1,5 @@
 import grandparent from "@/fixtures/grandparent-scam.json";
+import spanish from "@/fixtures/spanish-grandparent-scam.json";
 import bank from "@/fixtures/bank-impersonation.json";
 import romance from "@/fixtures/romance-pig-butchering.json";
 import safe from "@/fixtures/safe-conversation.json";
@@ -13,10 +14,11 @@ export interface Fixture {
   title: string;
   channel: string;
   caller: string;
+  language?: string;
   lines: FixtureLine[];
 }
 
-export const FIXTURES: Fixture[] = [grandparent, bank, romance, safe] as Fixture[];
+export const FIXTURES: Fixture[] = [grandparent, spanish, bank, romance, safe] as Fixture[];
 
 /** Flatten a fixture's lines into a single transcript string for the engine. */
 export function fixtureToText(f: Fixture): string {

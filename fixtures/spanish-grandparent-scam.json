@@ -1,0 +1,16 @@
+{
+  "id": "spanish-grandparent-scam",
+  "title": "🌍 Spanish Voice-Clone Scam (multilingual)",
+  "language": "Spanish",
+  "channel": "phone call",
+  "caller": "claims to be her grandson Mateo",
+  "lines": [
+    { "speaker": "Caller", "text": "¿Abuela? Soy yo, Mateo... estoy en un problema muy grave." },
+    { "speaker": "Abuela", "text": "¿Mateo? Dios mío, ¿qué pasó? Tu voz suena rara." },
+    { "speaker": "Caller", "text": "Tuve un accidente de coche y me arrestaron. Estoy en la cárcel ahora mismo. Por favor, tienes que ayudarme." },
+    { "speaker": "Abuela", "text": "¿Arrestado? ¿Debería llamar a tu madre?" },
+    { "speaker": "Caller", "text": "¡No! Por favor no le digas a mamá, se va a decepcionar mucho. Que quede entre nosotros, ¿de acuerdo?" },
+    { "speaker": "Caller", "text": "Mi abogado dice que necesito 4.000 dólares para la fianza ahora mismo o me quedo aquí toda la noche. No hay mucho tiempo." },
+    { "speaker": "Caller", "text": "Solo aceptan una transferencia bancaria. No cuelgues, quédate en la línea y te explico. Tenemos que hacerlo en los próximos minutos." }
+  ]
+}
