@@ -1,0 +1,14 @@
+{
+  "id": "bank-impersonation",
+  "title": "Fake Bank Fraud-Department Call",
+  "channel": "phone call",
+  "caller": "claims to be from the bank's fraud department",
+  "lines": [
+    { "speaker": "Caller", "text": "Hello, this is the fraud department at your bank. We've detected suspicious activity on your account." },
+    { "speaker": "You", "text": "Oh no, what kind of activity?" },
+    { "speaker": "Caller", "text": "Someone is trying to withdraw $2,300 right now. To stop it, we need to verify your identity immediately." },
+    { "speaker": "Caller", "text": "I'm going to send a code to your phone. Read it back to me so I can confirm it's really you." },
+    { "speaker": "You", "text": "Shouldn't I call the number on my card?" },
+    { "speaker": "Caller", "text": "There's no time for that, the transfer will go through. Don't hang up. For your safety we need to move your money to a secure account I'll set up for you now." }
+  ]
+}

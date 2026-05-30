@@ -1,0 +1,16 @@
+{
+  "id": "grandparent-scam",
+  "title": "The Cloned-Voice Grandparent Scam",
+  "channel": "phone call",
+  "caller": "claims to be her grandson Jake",
+  "lines": [
+    { "speaker": "Caller", "text": "Grandma? It's me, Jake... I'm in real trouble." },
+    { "speaker": "Margaret", "text": "Jake? Oh my goodness, what's wrong, you sound strange." },
+    { "speaker": "Caller", "text": "I got in a car accident and I got arrested. I'm in jail right now. Please, you have to help me." },
+    { "speaker": "Margaret", "text": "Arrested? Should I call your mother?" },
+    { "speaker": "Caller", "text": "No! Please don't tell mom, she'll be so disappointed. Keep this between us, okay? Promise me." },
+    { "speaker": "Caller", "text": "My lawyer says I need $4,000 for bail right now or I have to stay here overnight. There isn't much time." },
+    { "speaker": "Margaret", "text": "Four thousand dollars? How would I even send that?" },
+    { "speaker": "Caller", "text": "The bail bondsman only takes a wire transfer. Don't hang up, stay on the line and I'll walk you through it. We have to do this in the next few minutes." }
+  ]
+}

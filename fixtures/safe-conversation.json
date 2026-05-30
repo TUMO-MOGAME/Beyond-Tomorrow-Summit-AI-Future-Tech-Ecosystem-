@@ -1,0 +1,14 @@
+{
+  "id": "safe-conversation",
+  "title": "Normal Family Call (control — should NOT alarm)",
+  "channel": "phone call",
+  "caller": "her daughter Sarah",
+  "lines": [
+    { "speaker": "Sarah", "text": "Hi mom, just calling to check in. How was your doctor's appointment?" },
+    { "speaker": "Margaret", "text": "It went well, dear. Blood pressure's a little high but nothing to worry about." },
+    { "speaker": "Sarah", "text": "Good. Do you want me to pick up your prescription on the way over Sunday?" },
+    { "speaker": "Margaret", "text": "That would be lovely. Are the kids coming too?" },
+    { "speaker": "Sarah", "text": "Yes, they can't wait to see grandma. I'll bring lunch. Love you." },
+    { "speaker": "Margaret", "text": "Love you too. See you Sunday." }
+  ]
+}
