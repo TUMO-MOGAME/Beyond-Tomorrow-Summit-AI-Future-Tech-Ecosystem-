@@ -7,6 +7,8 @@ import RiskMeter from "@/components/RiskMeter";
 import TacticCard, { type Tactic } from "@/components/TacticCard";
 import VerdictBanner from "@/components/VerdictBanner";
 import TranscriptFeed, { type FeedLine } from "@/components/TranscriptFeed";
+import TransactionShield, { type ShieldState } from "@/components/TransactionShield";
+import TrustedCircle, { type AlertState } from "@/components/TrustedCircle";
 
 interface AnalyzeResult {
   provider: string;
@@ -20,6 +22,14 @@ interface AnalyzeResult {
 }
 
 const STREAM_DELAY = 1400; // ms between lines
+const DANGER_THRESHOLD = 75; // risk score that triggers intervention
+
+// Which fixtures involve a money transfer (show the Transaction Shield).
+const MONEY_FIXTURES = new Set([
+  "grandparent-scam",
+  "bank-impersonation",
+  "romance-pig-butchering",
+]);
 
 export default function Guardian() {
   const [mode, setMode] = useState<"simulate" | "paste">("simulate");
@@ -38,7 +48,48 @@ export default function Guardian() {
   // paste mode
   const [pasteText, setPasteText] = useState("");
 
+  // intervention layer
+  const [shield, setShield] = useState<ShieldState>("idle");
+  const [alert, setAlert] = useState<AlertState>("idle");
+  const [alertChannel, setAlertChannel] = useState<string>("mock");
+  const interveneRef = useRef(false); // guards single-fire per run
+
   const cancelRef = useRef(false);
+
+  async function fireIntervention(summary: string) {
+    if (interveneRef.current) return;
+    interveneRef.current = true;
+
+    // Freeze the money immediately.
+    setShield("held");
+
+    // Alert the Trusted Circle.
+    setAlert("sending");
+    try {
+      const res = await fetch("/api/alert", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          protectedName: "Margaret",
+          contactName: "Sarah (daughter)",
+          summary,
+        }),
+      });
+      const data = await res.json();
+      setAlertChannel(data.channel ?? "mock");
+    } catch {
+      setAlertChannel("mock");
+    }
+    setAlert("sent");
+  }
+
+  function resetIntervention(fixtureId?: string) {
+    interveneRef.current = false;
+    setAlert("idle");
+    setAlertChannel("mock");
+    // Pending transfer is shown only for money-related scams.
+    setShield(fixtureId && MONEY_FIXTURES.has(fixtureId) ? "pending" : "idle");
+  }
 
   const analyze = useCallback(async (conversation: string, meta?: { channel?: string; caller?: string }) => {
     const res = await fetch("/api/analyze", {
@@ -58,6 +109,7 @@ export default function Guardian() {
     setResult(null);
     setFeed([]);
     setActiveIndex(-1);
+    resetIntervention(activeFixture.id);
     setPlaying(true);
 
     const lines = activeFixture.lines;
@@ -77,7 +129,13 @@ export default function Guardian() {
           channel: activeFixture.channel,
           caller: activeFixture.caller,
         });
-        if (!cancelRef.current) setResult(data);
+        if (!cancelRef.current) {
+          setResult(data);
+          // Intervene the moment risk crosses into danger.
+          if (data.riskScore >= DANGER_THRESHOLD && MONEY_FIXTURES.has(activeFixture.id)) {
+            void fireIntervention(data.plainLanguageSummary);
+          }
+        }
       } catch (e) {
         if (!cancelRef.current) setError(e instanceof Error ? e.message : "Analysis failed");
       } finally {
@@ -161,6 +219,7 @@ export default function Guardian() {
                       setFeed([]);
                       setResult(null);
                       setActiveIndex(-1);
+                      resetIntervention(f.id);
                     }}
                     disabled={playing}
                     className={`rounded-md border px-3 py-1.5 text-xs transition disabled:opacity-50 ${
@@ -237,6 +296,14 @@ export default function Guardian() {
           {error && (
             <div className="rounded-xl border border-red-500/50 bg-red-500/10 p-4 text-sm text-red-300">
               {error}
+            </div>
+          )}
+
+          {/* Intervention layer — the cross-theme payoff */}
+          {(shield !== "idle" || alert !== "idle") && (
+            <div className="space-y-3">
+              {shield !== "idle" && <TransactionShield state={shield} />}
+              {alert !== "idle" && <TrustedCircle state={alert} channel={alertChannel} />}
             </div>
           )}
 
