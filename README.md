@@ -81,6 +81,15 @@ npm run dev
 
 Open http://localhost:3000 and click **Try the Guardian**.
 
+## 👵 Care Mode — protection with zero effort from the senior
+
+Aegis is designed around one principle: **the best protection for someone who can't protect themselves is protection they never have to think about.** The senior does nothing — their family sets it up once.
+
+- **Family-managed** — the adult child configures the Trusted Circle and settings from *their* phone; the senior's phone just runs Aegis silently.
+- **Always-on, invisible** — installed once, never opened again. No app to launch, no button to press when the phone rings.
+- **Automatic intervention** — on danger, family is alerted and the payment is frozen without the senior having to read a screen or make a decision.
+- **Roadmap:** a spoken warning in the call ("this may be a scam"), auto-callback verification of the real relative, and carrier/SIM-level deployment with nothing installed at all.
+
 ## 🗺️ Roadmap
 
 - Dedicated deepfake-audio forensics model as a second detection signal
@@ -88,6 +97,7 @@ Open http://localhost:3000 and click **Try the Guardian**.
 - B2B2C SDK for banks, telecom carriers, and insurers
 - Expanded multilingual coverage for global reach
 - Caregiver dashboard for eldercare providers
+- Spoken in-call warnings + carrier-level (SIM) deployment for zero-install protection
 
 ## 🌍 Impact
 
