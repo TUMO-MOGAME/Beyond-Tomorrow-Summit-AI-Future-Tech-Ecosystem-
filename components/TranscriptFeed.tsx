@@ -18,14 +18,13 @@ export default function TranscriptFeed({
   lines: FeedLine[];
   activeIndex: number;
 }) {
-  const isVictim = (speaker: string) =>
-    /margaret|you|victim/i.test(speaker);
+  const isVictim = (speaker: string) => /margaret|you|victim/i.test(speaker);
 
   return (
-    <div className="flex h-80 flex-col gap-2 overflow-y-auto rounded-xl border border-aegis-border bg-aegis-bg p-4">
+    <div className="scroll-soft flex h-80 flex-col gap-2.5 overflow-y-auto rounded-2xl border border-ink-line bg-ink/60 p-4">
       {lines.length === 0 && (
-        <div className="flex h-full items-center justify-center text-sm text-slate-600">
-          Press “Simulate live call” to begin
+        <div className="flex h-full items-center justify-center text-sm text-taupe">
+          Press &ldquo;Simulate live call&rdquo; to begin
         </div>
       )}
       <AnimatePresence initial={false}>
@@ -36,20 +35,20 @@ export default function TranscriptFeed({
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: active ? 1 : 0.7, y: 0 }}
+              animate={{ opacity: active ? 1 : 0.72, y: 0 }}
               transition={{ duration: 0.3 }}
               className={`flex ${victim ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[80%] rounded-2xl px-3.5 py-2 text-sm ${
+                className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                   victim
-                    ? "bg-blue-600/20 text-blue-100"
+                    ? "rounded-br-md bg-gold/[0.12] text-gold-soft"
                     : active
-                    ? "bg-red-500/15 text-slate-100 ring-1 ring-red-500/40"
-                    : "bg-aegis-panel text-slate-200"
+                    ? "rounded-bl-md bg-clay/[0.12] text-cream ring-1 ring-clay/35"
+                    : "rounded-bl-md bg-ink-raised text-cream/90"
                 }`}
               >
-                <div className="mb-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                <div className="mb-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-taupe">
                   {line.speaker}
                 </div>
                 {line.text}

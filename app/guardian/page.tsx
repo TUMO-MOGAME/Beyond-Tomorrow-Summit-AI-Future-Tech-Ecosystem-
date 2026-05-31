@@ -10,6 +10,7 @@ import TranscriptFeed, { type FeedLine } from "@/components/TranscriptFeed";
 import TransactionShield, { type ShieldState } from "@/components/TransactionShield";
 import TrustedCircle, { type AlertState } from "@/components/TrustedCircle";
 import AegisLogo from "@/components/AegisLogo";
+import Icon from "@/components/Icon";
 
 interface AnalyzeResult {
   provider: string;
@@ -182,36 +183,40 @@ export default function Guardian() {
   return (
     <main className="mx-auto max-w-7xl px-6 py-8">
       {/* header */}
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-8 flex items-center justify-between">
         <Link href="/" className="transition hover:opacity-80">
           <AegisLogo size={26} />
         </Link>
-        <div className="flex gap-1 rounded-lg border border-aegis-border bg-aegis-panel p-1">
+        <div className="flex gap-1 rounded-full border border-ink-line bg-ink-panel p-1">
           <button
             onClick={() => setMode("simulate")}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
-              mode === "simulate" ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"
+            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition ${
+              mode === "simulate" ? "bg-gold text-ink" : "text-sand hover:text-cream"
             }`}
           >
-            🔴 Simulate live call
+            <Icon name="broadcast" size={14} /> Simulate live call
           </button>
           <button
             onClick={() => setMode("paste")}
-            className={`rounded-md px-3 py-1.5 text-xs font-medium transition ${
-              mode === "paste" ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"
+            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition ${
+              mode === "paste" ? "bg-gold text-ink" : "text-sand hover:text-cream"
             }`}
           >
-            📝 Paste your own
+            <Icon name="clipboard" size={14} /> Paste your own
           </button>
         </div>
       </div>
 
-      <h1 className="text-2xl font-bold text-white">🛡️ The Guardian</h1>
-      <p className="mt-1 text-sm text-slate-400">
-        Watch Aegis analyze a conversation in real time and intervene before money is lost.
+      <div className="eyebrow mb-2">The Guardian · real-time analysis</div>
+      <h1 className="font-display text-3xl font-light tracking-tight text-cream sm:text-4xl">
+        Watch a scam get caught, live.
+      </h1>
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-sand">
+        Aegis analyzes the conversation line-by-line and intervenes the moment risk crosses into
+        danger — before the money is gone.
       </p>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+      <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
         {/* LEFT: input / transcript */}
         <div>
           {mode === "simulate" ? (
@@ -229,10 +234,10 @@ export default function Guardian() {
                       resetIntervention(f.id);
                     }}
                     disabled={playing}
-                    className={`rounded-md border px-3 py-1.5 text-xs transition disabled:opacity-50 ${
+                    className={`rounded-full border px-3.5 py-1.5 text-xs transition disabled:opacity-50 ${
                       activeFixture.id === f.id
-                        ? "border-blue-500 bg-blue-600/20 text-white"
-                        : "border-aegis-border bg-aegis-panel text-slate-300 hover:border-blue-500"
+                        ? "border-gold/50 bg-gold/15 text-gold-soft"
+                        : "border-ink-line bg-ink-panel text-sand hover:border-gold/40 hover:text-cream"
                     }`}
                   >
                     {f.title}
@@ -244,16 +249,16 @@ export default function Guardian() {
                 {!playing ? (
                   <button
                     onClick={simulate}
-                    className="flex-1 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-semibold text-ink shadow-gold transition hover:bg-gold-soft"
                   >
-                    ▶ Simulate live call
+                    <Icon name="play" size={16} /> Simulate live call
                   </button>
                 ) : (
                   <button
                     onClick={stop}
-                    className="flex-1 rounded-lg bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-500"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-full border border-clay/50 bg-clay/15 px-6 py-3 font-semibold text-clay transition hover:bg-clay/25"
                   >
-                    ■ Stop
+                    <Icon name="stop" size={14} /> Stop
                   </button>
                 )}
               </div>
@@ -265,7 +270,7 @@ export default function Guardian() {
                   <button
                     key={f.id}
                     onClick={() => setPasteText(fixtureToText(f))}
-                    className="rounded-md border border-aegis-border bg-aegis-panel px-3 py-1.5 text-xs text-slate-300 transition hover:border-blue-500"
+                    className="rounded-full border border-ink-line bg-ink-panel px-3.5 py-1.5 text-xs text-sand transition hover:border-gold/40 hover:text-cream"
                   >
                     {f.title}
                   </button>
@@ -275,12 +280,12 @@ export default function Guardian() {
                 value={pasteText}
                 onChange={(e) => setPasteText(e.target.value)}
                 placeholder="Paste a phone call transcript, SMS, or chat here…"
-                className="h-72 w-full resize-none rounded-xl border border-aegis-border bg-aegis-panel p-4 text-sm text-slate-200 outline-none focus:border-blue-500"
+                className="focus-gold scroll-soft h-72 w-full resize-none rounded-2xl border border-ink-line bg-ink-panel p-4 text-sm leading-relaxed text-cream placeholder:text-taupe"
               />
               <button
                 onClick={analyzePaste}
                 disabled={analyzing || pasteText.trim().length < 4}
-                className="mt-3 w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500 disabled:opacity-40"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-semibold text-ink shadow-gold transition hover:bg-gold-soft disabled:opacity-40 disabled:shadow-none"
               >
                 {analyzing ? "Analyzing…" : "Analyze with Aegis"}
               </button>
@@ -290,18 +295,22 @@ export default function Guardian() {
 
         {/* RIGHT: live analysis */}
         <div className="space-y-4">
-          <div className="rounded-xl border border-aegis-border bg-aegis-panel p-5">
+          <div className="rounded-2xl border border-ink-line bg-ink-panel p-5 shadow-panel">
             <RiskMeter score={score} />
             {result && (
-              <div className="mt-2 text-center text-[11px] text-slate-500">
+              <div className="mt-2 flex items-center justify-center gap-2 font-mono text-[11px] text-taupe">
                 analyzed via {result.provider} · {result.model}
-                {analyzing && <span className="ml-2 animate-pulse text-blue-400">● live</span>}
+                {analyzing && (
+                  <span className="flex items-center gap-1 text-gold">
+                    <span className="h-1.5 w-1.5 animate-breathe rounded-full bg-gold" /> live
+                  </span>
+                )}
               </div>
             )}
           </div>
 
           {error && (
-            <div className="rounded-xl border border-red-500/50 bg-red-500/10 p-4 text-sm text-red-300">
+            <div className="rounded-2xl border border-clay/45 bg-clay/10 p-4 text-sm text-clay">
               {error}
             </div>
           )}
@@ -330,13 +339,13 @@ export default function Guardian() {
           )}
 
           {result && (
-            <div className="space-y-2">
-              <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            <div className="space-y-2.5">
+              <div className="eyebrow">
                 Manipulation tactics detected ({result.tactics.length})
               </div>
               {result.tactics.length === 0 ? (
-                <div className="rounded-lg border border-green-500/30 bg-green-500/5 p-3 text-sm text-green-300">
-                  No manipulation tactics detected. ✅
+                <div className="flex items-center gap-2 rounded-xl border border-sage/30 bg-sage/[0.06] p-3 text-sm text-sage">
+                  <Icon name="check" size={16} /> No manipulation tactics detected.
                 </div>
               ) : (
                 result.tactics.map((t, i) => <TacticCard key={`${t.name}-${i}`} tactic={t} index={i} />)
@@ -345,7 +354,7 @@ export default function Guardian() {
           )}
 
           {!result && !error && (
-            <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-aegis-border text-sm text-slate-600">
+            <div className="flex h-32 items-center justify-center rounded-2xl border border-dashed border-ink-line text-sm text-taupe">
               Analysis will appear here as the conversation unfolds
             </div>
           )}

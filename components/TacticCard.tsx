@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Icon, { type IconName } from "./Icon";
 
 export interface Tactic {
   name: string;
@@ -10,55 +11,57 @@ export interface Tactic {
 }
 
 const SEVERITY: Record<string, { dot: string; ring: string; label: string }> = {
-  low: { dot: "bg-amber-400", ring: "border-amber-500/30", label: "text-amber-300" },
-  medium: { dot: "bg-orange-500", ring: "border-orange-500/40", label: "text-orange-300" },
-  high: { dot: "bg-red-500", ring: "border-red-500/50", label: "text-red-300" },
+  low: { dot: "bg-caution", ring: "border-caution/25", label: "text-caution" },
+  medium: { dot: "bg-clay/80", ring: "border-clay/30", label: "text-clay" },
+  high: { dot: "bg-clay", ring: "border-clay/45", label: "text-clay" },
 };
 
-const ICONS: Record<string, string> = {
-  Urgency: "⏱️",
-  "Authority Impersonation": "🎭",
-  Authority: "🎭",
-  Impersonation: "🎭",
-  Secrecy: "🤫",
-  "Fear / Threat": "⚠️",
-  "Fear/Threat": "⚠️",
-  Fear: "⚠️",
-  "Irreversible Payment": "💸",
-  "Too-Good Reward": "🎁",
-  "Trust Grooming": "💔",
-  "Verification Evasion": "🚫",
+const ICONS: Record<string, IconName> = {
+  Urgency: "clock",
+  "Authority Impersonation": "mask",
+  Authority: "mask",
+  Impersonation: "mask",
+  Secrecy: "whisper",
+  "Fear / Threat": "alert",
+  "Fear/Threat": "alert",
+  Fear: "alert",
+  "Irreversible Payment": "money",
+  "Too-Good Reward": "gift",
+  "Trust Grooming": "heart-crack",
+  "Verification Evasion": "ban",
 };
 
 export default function TacticCard({ tactic, index }: { tactic: Tactic; index: number }) {
   const s = SEVERITY[tactic.severity] ?? SEVERITY.high;
-  const icon =
+  const icon: IconName =
     ICONS[tactic.name] ??
-    Object.entries(ICONS).find(([k]) => tactic.name.includes(k))?.[1] ??
-    "🚩";
+    (Object.entries(ICONS).find(([k]) => tactic.name.includes(k))?.[1] as IconName) ??
+    "flag";
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, x: 24, scale: 0.96 }}
+      initial={{ opacity: 0, x: 20, scale: 0.97 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
-      transition={{ duration: 0.35, delay: index * 0.05, ease: "easeOut" }}
-      className={`rounded-lg border bg-aegis-panel p-3 ${s.ring}`}
+      transition={{ duration: 0.35, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+      className={`rounded-xl border bg-ink-panel/70 p-3.5 ${s.ring}`}
     >
-      <div className="flex items-center gap-2">
-        <span className="text-lg">{icon}</span>
-        <span className="font-semibold text-white">{tactic.name}</span>
+      <div className="flex items-center gap-2.5">
+        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink-raised text-clay">
+          <Icon name={icon} size={16} />
+        </span>
+        <span className="font-medium text-cream">{tactic.name}</span>
         <span className="ml-auto flex items-center gap-1.5">
-          <span className={`h-2 w-2 rounded-full ${s.dot}`} />
-          <span className={`text-[10px] font-bold uppercase ${s.label}`}>
+          <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
+          <span className={`font-mono text-[10px] font-medium uppercase tracking-wider ${s.label}`}>
             {tactic.severity}
           </span>
         </span>
       </div>
-      <p className="mt-2 border-l-2 border-slate-600 pl-3 text-sm italic text-slate-300">
-        “{tactic.quote}”
+      <p className="mt-2.5 border-l-2 border-ink-line2 pl-3 font-display text-sm italic text-sand">
+        &ldquo;{tactic.quote}&rdquo;
       </p>
-      <p className="mt-1.5 text-sm text-slate-400">{tactic.explanation}</p>
+      <p className="mt-2 text-sm leading-relaxed text-sand">{tactic.explanation}</p>
     </motion.div>
   );
 }

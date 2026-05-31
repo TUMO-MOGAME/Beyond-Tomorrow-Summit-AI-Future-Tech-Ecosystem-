@@ -57,14 +57,24 @@ Zod (validation) · Vercel (deploy) · GitHub. Python only for `scripts/build_de
 | `app/page.tsx` | Landing (hero, stats, Care Mode) |
 | `app/guardian/page.tsx` | Real-time dashboard (the demo centerpiece) |
 | `app/care/page.tsx` | Care Mode setup (zero-effort elderly story) |
-| `components/` | RiskMeter, TacticCard, VerdictBanner, TranscriptFeed, TransactionShield, TrustedCircle, AegisLogo |
+| `components/` | RiskMeter, TacticCard, VerdictBanner, TranscriptFeed, TransactionShield, TrustedCircle, AegisLogo, Icon (line-icon set), Photo (framed next/image) |
 | `fixtures/` | grandparent (EN+ES), bank, romance, safe-control |
 | `scripts/test_engine.mjs` | 37-check test suite (`npm test`) |
+| `public/images/` | Human photography used on the site (see `CREDITS.md`); referenced via `/images/*` |
+| `assets/unused-photos/` | Source photos we chose **not** to ship (kept, not served) |
 
-## Plan docs (numbered, in repo root)
-`00_MASTER_PLAN` · `01_BUILD_SPEC` · `02_TIMELINE` · `03_SUBMISSION_PACKAGE` ·
+## Design system ("Pure mono")
+True black (`#000`) + white text + grayscale ramp; the **only** color is the functional risk
+signal (safe/caution/danger) on the meter & verdicts. Type: **Fraunces** (display serif) ·
+**Hanken Grotesk** (body) · **JetBrains Mono** (telemetry). All emoji replaced by the custom
+`Icon` set. Tokens live in `tailwind.config.ts`; atmosphere/utilities in `app/globals.css`.
+The UI is monochrome on purpose so the **people in the photos** carry the warmth.
+
+## Plan docs (now in [`docs/`](docs/) — see [docs/README.md](docs/README.md) for the index)
+`docs/00_MASTER_PLAN` · `01_BUILD_SPEC` · `02_TIMELINE` · `03_SUBMISSION_PACKAGE` ·
 `04_PITCH_DECK` · `05_DEMO_VIDEO_SCRIPT` · `06_SKILLS_AND_TOOLS` · `07_DEPLOY_GUIDE` ·
-`08_VIDEO_TELEPROMPTER` · `09_SUBMISSION_CHECKLIST` · `10_ROUND2_PITCH` · `TESTING.md`
+`08_VIDEO_TELEPROMPTER` · `09_SUBMISSION_CHECKLIST` · `10_ROUND2_PITCH` · `TESTING.md` ·
+`Aegis_Pitch_Deck.pptx`
 
 ---
 
@@ -80,8 +90,11 @@ Zod (validation) · Vercel (deploy) · GitHub. Python only for `scripts/build_de
 - **Testing:** `npm run start` then `npm test` (or `AEGIS_URL=<live> npm test`).
 
 ## Environment keys (.env.local — never commit)
-`ANTHROPIC_API_KEY` (+ `ANTHROPIC_MODEL=claude-sonnet-4-6`) · or `OPENAI_API_KEY` ·
-`LLM_PROVIDER` (optional override) · `RESEND_API_KEY` + `ALERT_TO_EMAIL` (optional, real alerts).
+Auto-detect order: **anthropic → groq → gemini → openrouter → openai → mock.**
+- Paid: `ANTHROPIC_API_KEY` (+ `ANTHROPIC_MODEL`) · `OPENAI_API_KEY` (+ `OPENAI_MODEL`, optional `OPENAI_BASE_URL`).
+- **Free:** `GROQ_API_KEY` (Llama 3.3 70B, fast) · `GEMINI_API_KEY` (gemini-2.0-flash, multilingual/multimodal) · `OPENROUTER_API_KEY` (free model variants). Any OpenAI-compatible endpoint works via `OPENAI_BASE_URL` (incl. local Ollama).
+- `LLM_PROVIDER` forces one. `RESEND_API_KEY` + `ALERT_TO_EMAIL` enable real Trusted-Circle emails.
+- Engine routing lives in [lib/llm.ts](lib/llm.ts): Anthropic via its SDK; all others share one OpenAI-compatible path with a tiered JSON strategy (strict schema → json_object → plain-parse).
 
 ---
 

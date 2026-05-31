@@ -1,11 +1,11 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Aegis design system — "Quiet modern dark".
- * Warm charcoal ink, a single confident signet-gold accent, calm semantic
- * states (sage / amber / clay) tuned to the palette so nothing screams.
- * NOT navy. NOT electric blue. Reads like a private security desk, not a
- * hacker dashboard.
+ * Aegis design system — "Pure mono".
+ * True black, white text, a precise grayscale ramp. The only color in the
+ * system is the functional risk signal (safe / caution / danger) on the
+ * meter and verdicts — everything else is monochrome. Sharp, editorial,
+ * unmistakably designed.
  */
 const config: Config = {
   content: [
@@ -15,37 +15,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // warm charcoal surfaces
+        // pure black surfaces, climbing in near-imperceptible steps
         ink: {
-          DEFAULT: "#161311", // page
-          panel: "#1E1A16", // cards / panels
-          raised: "#262019", // inputs / raised
-          line: "#352E25", // hairline borders
-          line2: "#473E31", // stronger borders / focus
+          DEFAULT: "#000000", // page
+          panel: "#0B0B0C", // cards / panels
+          raised: "#151517", // inputs / raised
+          line: "#242427", // hairline borders
+          line2: "#37373D", // stronger borders / focus
         },
-        // warm neutral type ramp
-        cream: "#ECE4D6", // primary text
-        sand: "#A89E8D", // secondary text
-        taupe: "#6E665A", // faint / captions
-        // signet-gold accent (the one confident color)
+        // neutral type ramp
+        cream: "#FFFFFF", // primary text (white)
+        sand: "#A4A4AC", // secondary text
+        taupe: "#67676F", // faint / captions
+        // monochrome "accent" — white. (named `gold` for back-compat with
+        // existing class names; every value is now grayscale.)
         gold: {
-          DEFAULT: "#D8A84B",
-          soft: "#E8C173",
-          dim: "#9A7C38",
+          DEFAULT: "#FFFFFF",
+          soft: "#DCDCDF", // hover
+          dim: "#3A3A40", // focus border
         },
-        // calm semantic states
-        sage: "#88B29A", // safe
-        caution: "#D6A040", // caution
-        clay: "#CE6B4A", // danger (decisive, not alarm-bell)
+        // functional risk states — the only color in the system
+        sage: "#7FD6A6", // safe
+        caution: "#E0B448", // caution
+        clay: "#F0613F", // danger
         // back-compat aliases so legacy class names keep resolving
         aegis: {
-          bg: "#161311",
-          panel: "#1E1A16",
-          border: "#352E25",
-          accent: "#D8A84B",
-          safe: "#88B29A",
-          caution: "#D6A040",
-          danger: "#CE6B4A",
+          bg: "#000000",
+          panel: "#0B0B0C",
+          border: "#242427",
+          accent: "#FFFFFF",
+          safe: "#7FD6A6",
+          caution: "#E0B448",
+          danger: "#F0613F",
         },
       },
       fontFamily: {
@@ -60,9 +61,9 @@ const config: Config = {
         "4xl": "2rem",
       },
       boxShadow: {
-        panel: "0 1px 0 rgba(255,255,255,0.02) inset, 0 18px 40px -24px rgba(0,0,0,0.7)",
-        lift: "0 24px 60px -30px rgba(0,0,0,0.85)",
-        gold: "0 14px 36px -14px rgba(216,168,75,0.45)",
+        panel: "0 1px 0 rgba(255,255,255,0.03) inset, 0 18px 40px -24px rgba(0,0,0,0.9)",
+        lift: "0 24px 60px -30px rgba(0,0,0,1)",
+        gold: "0 14px 36px -14px rgba(255,255,255,0.25)",
       },
       keyframes: {
         "fade-up": {

@@ -14,22 +14,20 @@
 
 html,
 body {
-  background-color: #161311;
-  color: #ece4d6;
+  background-color: #000000;
+  color: #ffffff;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Atmospheric depth: two soft warm light sources, fixed behind everything.
-   Keeps the dark theme from reading as a flat black void. */
+/* Atmospheric depth: a single faint cool light from the top, fixed behind
+   everything. Just enough to keep pure black from reading as a dead void. */
 body {
   position: relative;
   min-height: 100vh;
   background-image:
-    radial-gradient(60rem 60rem at 12% -8%, rgba(216, 168, 75, 0.1), transparent 60%),
-    radial-gradient(50rem 50rem at 108% 8%, rgba(136, 178, 154, 0.07), transparent 55%),
-    radial-gradient(70rem 50rem at 50% 120%, rgba(206, 107, 74, 0.05), transparent 60%);
+    radial-gradient(70rem 50rem at 50% -12%, rgba(255, 255, 255, 0.05), transparent 60%);
   background-attachment: fixed;
 }
 
@@ -53,8 +51,8 @@ footer {
 }
 
 ::selection {
-  background: rgba(216, 168, 75, 0.28);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.85);
+  color: #000;
 }
 
 /* Display type: optical sizing + tight tracking gives the editorial feel. */
@@ -66,11 +64,11 @@ footer {
 
 /* Hairline frame used across panels. */
 .panel {
-  background-color: #1e1a16;
-  border: 1px solid #352e25;
+  background-color: #0b0b0c;
+  border: 1px solid #242427;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.02) inset,
-    0 18px 40px -24px rgba(0, 0, 0, 0.7);
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 18px 40px -24px rgba(0, 0, 0, 0.9);
 }
 
 /* Uppercase instrument labels (telemetry / section eyebrows). */
@@ -79,7 +77,7 @@ footer {
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #6e665a;
+  color: #67676f;
 }
 
 /* Tasteful scrollbars inside dark panels. */
@@ -87,16 +85,16 @@ footer {
   width: 8px;
 }
 .scroll-soft::-webkit-scrollbar-thumb {
-  background: #473e31;
+  background: #37373d;
   border-radius: 999px;
 }
 .scroll-soft::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* Hand-tuned focus ring in the brand accent. */
+/* Hand-tuned focus ring — subtle white halo. */
 .focus-gold:focus {
   outline: none;
-  border-color: #9a7c38;
-  box-shadow: 0 0 0 3px rgba(216, 168, 75, 0.18);
+  border-color: #5a5a62;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);
 }

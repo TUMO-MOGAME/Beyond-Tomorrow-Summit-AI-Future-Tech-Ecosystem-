@@ -1,5 +1,6 @@
 /**
  * Aegis shield wordmark. Pure SVG — crisp at any size, no asset dependency.
+ * Signet-gold shield with a cream guard mark; wordmark set in the display serif.
  */
 export default function AegisLogo({
   size = 28,
@@ -9,7 +10,7 @@ export default function AegisLogo({
   withWordmark?: boolean;
 }) {
   return (
-    <span className="inline-flex items-center gap-2">
+    <span className="inline-flex items-center gap-2.5">
       <svg
         width={size}
         height={size}
@@ -19,9 +20,9 @@ export default function AegisLogo({
         aria-label="Aegis"
       >
         <defs>
-          <linearGradient id="aegisShield" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#60a5fa" />
-            <stop offset="1" stopColor="#2563eb" />
+          <linearGradient id="aegisShield" x1="8" y1="3" x2="40" y2="45" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFFFFF" />
+            <stop offset="1" stopColor="#C9C9CF" />
           </linearGradient>
         </defs>
         {/* shield */}
@@ -29,10 +30,10 @@ export default function AegisLogo({
           d="M24 3 L41 9 V23 C41 34 33.5 41.5 24 45 C14.5 41.5 7 34 7 23 V9 Z"
           fill="url(#aegisShield)"
         />
-        {/* inner check / pulse mark */}
+        {/* inner guard mark */}
         <path
           d="M15 24 L21 30 L33 17"
-          stroke="white"
+          stroke="#000000"
           strokeWidth="3.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -40,7 +41,9 @@ export default function AegisLogo({
         />
       </svg>
       {withWordmark && (
-        <span className="text-xl font-extrabold tracking-tight text-white">Aegis</span>
+        <span className="font-display text-xl font-semibold tracking-tightest text-cream">
+          Aegis
+        </span>
       )}
     </span>
   );

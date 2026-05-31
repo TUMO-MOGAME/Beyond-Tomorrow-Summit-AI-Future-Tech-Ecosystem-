@@ -96,7 +96,7 @@ npm run start   # start the app (mock engine needs no key)
 npm test        # run the suite
 ```
 
-See [TESTING.md](TESTING.md) for full coverage details.
+See [docs/TESTING.md](docs/TESTING.md) for full coverage details.
 
 ## 👵 Care Mode — protection with zero effort from the senior
 
