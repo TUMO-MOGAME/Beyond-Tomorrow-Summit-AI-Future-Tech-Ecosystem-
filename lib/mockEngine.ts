@@ -22,7 +22,7 @@ const SIGNALS: Array<{
   {
     name: "Authority Impersonation",
     severity: "high",
-    patterns: [/this is your (bank|grandson|grandma|son|daughter)/i, /from the (irs|bank|police|government|court)/i, /officer\b/i, /attorney/i, /it'?s me/i, /soy yo/i, /soy (tu )?(mateo|nieto|hijo|abogado)/i, /tu abogado/i],
+    patterns: [/this is your (bank|grandson|grandma|son|daughter)/i, /from the (irs|bank|police|government|court)/i, /officer\b/i, /attorney/i, /it'?s me/i, /fraud (department|team|prevention)/i, /(this is|calling from).{0,20}bank/i, /soy yo/i, /soy (tu )?(mateo|nieto|hijo|abogado)/i, /tu abogado/i],
     explanation: "Claiming to be a trusted authority or relative is the core of impersonation scams.",
     weight: 20,
   },
@@ -36,15 +36,22 @@ const SIGNALS: Array<{
   {
     name: "Fear / Threat",
     severity: "high",
-    patterns: [/arrest(ed)?/i, /jail/i, /lawsuit|sued|legal action/i, /account (will be )?(closed|suspended|frozen)/i, /deport/i, /warrant/i, /me arrestaron/i, /(en la )?cárcel/i, /accidente/i],
+    patterns: [/arrest(ed)?/i, /jail/i, /lawsuit|sued|legal action/i, /account (will be )?(closed|suspended|frozen)/i, /deport/i, /warrant/i, /suspicious (activity|transaction)/i, /unauthorized (charge|transaction|access)/i, /me arrestaron/i, /(en la )?cárcel/i, /accidente/i],
     explanation: "Threats of arrest, loss, or harm pressure victims into compliance.",
     weight: 18,
   },
   {
+    name: "Credential / Identity Theft",
+    severity: "high",
+    patterns: [/verify your identity/i, /read (it|the code|the number) back/i, /(security|verification|one-?time) code/i, /(send|read|give) (me )?(the |your )?(code|otp|pin)/i, /confirm your (card|account|password|pin)/i],
+    explanation: "Real institutions never ask you to read back a code or share a PIN — that hands over your account.",
+    weight: 20,
+  },
+  {
     name: "Irreversible Payment",
     severity: "high",
-    patterns: [/gift card/i, /wire (transfer|the money)/i, /bitcoin|crypto|usdt/i, /western union|moneygram/i, /zelle|cash app|venmo/i, /bail/i, /transferencia bancaria/i, /fianza/i],
-    explanation: "Gift cards, wires, and crypto can't be reversed — the scammer's preferred payment.",
+    patterns: [/gift card/i, /wire (transfer|the money)/i, /bitcoin|crypto|usdt/i, /western union|moneygram/i, /zelle|cash app|venmo/i, /bail/i, /(move|transfer) (your )?(money|funds).{0,30}(secure|safe|protected) account/i, /secure account/i, /transferencia bancaria/i, /fianza/i],
+    explanation: "Gift cards, wires, crypto, or moving money to a 'secure account' can't be reversed — the scammer's goal.",
     weight: 22,
   },
   {
