@@ -46,14 +46,12 @@ export default function Home() {
           >
             Try the Guardian →
           </Link>
-          <a
-            href="https://github.com/TUMO-MOGAME/Beyond-Tomorrow-Summit-AI-Future-Tech-Ecosystem-"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href="/care"
             className="rounded-lg border border-aegis-border px-7 py-3.5 text-base font-semibold text-slate-200 transition hover:bg-aegis-panel"
           >
-            GitHub
-          </a>
+            Protect a loved one
+          </Link>
         </div>
       </section>
 
@@ -142,6 +140,14 @@ export default function Home() {
                 <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{c.body}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/care"
+              className="inline-block rounded-lg bg-blue-600 px-7 py-3 text-base font-semibold text-white transition hover:bg-blue-500"
+            >
+              Set up Care Mode →
+            </Link>
           </div>
         </div>
       </section>
