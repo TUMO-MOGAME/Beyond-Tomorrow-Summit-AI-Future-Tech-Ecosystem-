@@ -63,6 +63,19 @@ const SIGNALS: Array<{
   },
 ];
 
+/**
+ * Pull a readable quote around a match, snapped to word boundaries so it never
+ * starts/ends mid-word (e.g. avoids "il by wire transfer").
+ */
+function extractQuote(text: string, idx: number, len: number): string {
+  let start = Math.max(0, idx - 24);
+  let end = Math.min(text.length, idx + len + 28);
+  // walk start left to a word boundary; walk end right to one
+  while (start > 0 && /\S/.test(text[start - 1])) start--;
+  while (end < text.length && /\S/.test(text[end])) end++;
+  return text.slice(start, end).replace(/\s+/g, " ").trim();
+}
+
 export function mockAnalyze(conversation: string): ScamAnalysis {
   const tactics: Tactic[] = [];
   let score = 0;

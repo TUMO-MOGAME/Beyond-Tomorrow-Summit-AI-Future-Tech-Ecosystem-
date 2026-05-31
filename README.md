@@ -85,6 +85,19 @@ Open http://localhost:3000 and click **Try the Guardian**.
 
 > **Or skip setup — try it live:** [beyond-tomorrow-summit-ai-future-te.vercel.app](https://beyond-tomorrow-summit-ai-future-te.vercel.app/)
 
+## 🧪 Testing
+
+Aegis has an automated test harness — **39 checks** covering all fixtures, schema
+integrity, multilingual detection, false-positive prevention, edge cases, and
+adversarial input. All passing locally and in production.
+
+```bash
+npm run start   # start the app (mock engine needs no key)
+npm test        # run the suite
+```
+
+See [TESTING.md](TESTING.md) for full coverage details.
+
 ## 👵 Care Mode — protection with zero effort from the senior
 
 Aegis is designed around one principle: **the best protection for someone who can't protect themselves is protection they never have to think about.** The senior does nothing — their family sets it up once.
