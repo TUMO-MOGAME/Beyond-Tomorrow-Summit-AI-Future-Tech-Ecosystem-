@@ -1,0 +1,13 @@
+{
+  "id": "sextortion-scam",
+  "title": "Sextortion / Blackmail Email Scam",
+  "channel": "email",
+  "caller": "an anonymous blackmailer",
+  "lines": [
+    { "speaker": "Sender", "text": "I have bad news for you. A few months ago I gained access to your devices and have been monitoring you." },
+    { "speaker": "Sender", "text": "I recorded you through your webcam and saved everything. I also have your contacts and your password." },
+    { "speaker": "Sender", "text": "If you don't want me to send the video to your family and coworkers, you must pay." },
+    { "speaker": "Sender", "text": "Send $1,500 in Bitcoin to the wallet below within 48 hours. The timer has already started." },
+    { "speaker": "Sender", "text": "Do not reply, do not tell anyone, and do not contact the police. I will know if you do, and I will release everything immediately." }
+  ]
+}

@@ -29,7 +29,7 @@ const SIGNALS: Array<{
   {
     name: "Secrecy",
     severity: "high",
-    patterns: [/don'?t tell (anyone|mom|dad|your family)/i, /keep this (between us|a secret)/i, /just between you and me/i, /no le digas a (mamá|nadie|tu familia)/i, /que quede entre nosotros/i],
+    patterns: [/don'?t tell (anyone|mom|dad|your family|your bank)/i, /keep this (between us|a secret)/i, /just between you and me/i, /they (don'?t understand|will only slow you)/i, /no le digas a (mamá|nadie|tu familia)/i, /que quede entre nosotros/i],
     explanation: "Demanding secrecy isolates the victim from people who would spot the scam.",
     weight: 20,
   },
@@ -57,9 +57,30 @@ const SIGNALS: Array<{
   {
     name: "Too-Good Reward",
     severity: "medium",
-    patterns: [/you'?ve won/i, /lottery|prize|sweepstakes/i, /tax refund/i, /guaranteed returns?/i, /double your (money|investment)/i],
-    explanation: "Unexpected winnings or guaranteed returns are classic bait.",
+    patterns: [/you'?ve won/i, /lottery|prize|sweepstakes/i, /tax refund/i, /guaranteed returns?/i, /double your (money|investment)/i, /\d{2,}% returns?/i, /zero risk/i, /never loses/i, /\$\d+ (per|a) day/i, /no experience needed/i, /you'?ve been selected/i, /congratulations/i],
+    explanation: "Unexpected winnings, guaranteed returns, or easy money are classic bait.",
     weight: 16,
+  },
+  {
+    name: "Advance-Fee Demand",
+    severity: "high",
+    patterns: [/onboarding fee/i, /training (kit|fee)/i, /(security|license) (fee|license)/i, /refundable with your first/i, /pay.{0,20}(to (start|activate|secure)|before)/i, /equipment fee/i],
+    explanation: "Being asked to pay upfront to receive a job, prize, or service is a hallmark of fraud.",
+    weight: 18,
+  },
+  {
+    name: "Blackmail / Extortion",
+    severity: "high",
+    patterns: [/webcam/i, /recorded you/i, /(send|release|leak) (the |your )?(video|photos|images)/i, /access to your (devices?|computer|accounts?)/i, /i have your (password|contacts)/i, /(don'?t|do not) (contact|tell) (the )?(police|anyone)/i, /pay.{0,30}(or|otherwise) i('| wi)ll/i],
+    explanation: "Threatening to expose private material unless you pay is extortion — the claims are almost always bluffs.",
+    weight: 24,
+  },
+  {
+    name: "Remote-Access / Malware",
+    severity: "high",
+    patterns: [/remote (in|access|into)/i, /download (a |the |this )?(program|software|app|tool)/i, /(detected|found) a (serious )?(virus|threat|malware)/i, /(microsoft|apple|windows) (technical |tech )?support/i, /do not (turn off|shut down|restart) your computer/i],
+    explanation: "Real tech companies never cold-call to take remote control of your computer.",
+    weight: 20,
   },
   {
     name: "Verification Evasion",

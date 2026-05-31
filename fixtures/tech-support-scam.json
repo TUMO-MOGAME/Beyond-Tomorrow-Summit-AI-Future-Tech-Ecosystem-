@@ -1,0 +1,14 @@
+{
+  "id": "tech-support-scam",
+  "title": "Microsoft Tech-Support Scam",
+  "channel": "phone call",
+  "caller": "claims to be Microsoft technical support",
+  "lines": [
+    { "speaker": "Caller", "text": "Hello, I'm calling from Microsoft technical support. Our servers detected a serious virus on your computer." },
+    { "speaker": "You", "text": "A virus? I didn't report anything." },
+    { "speaker": "Caller", "text": "It's a critical threat — hackers are stealing your banking details right now. We must act immediately before they drain your account." },
+    { "speaker": "Caller", "text": "I need you to download a program so I can remote in and fix it. Do not turn off your computer." },
+    { "speaker": "You", "text": "Is this really Microsoft?" },
+    { "speaker": "Caller", "text": "Yes sir. To cover the security license, you'll need to pay $299 — and the only way our system accepts is with Apple gift cards. Go to the store now and read me the codes." }
+  ]
+}

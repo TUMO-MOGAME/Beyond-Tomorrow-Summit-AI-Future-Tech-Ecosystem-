@@ -25,13 +25,18 @@ interface AnalyzeResult {
 const STREAM_DELAY = 1400; // ms between lines
 const DANGER_THRESHOLD = 75; // risk score that triggers intervention
 
-// Which fixtures involve a money transfer (show the Transaction Shield).
-const MONEY_FIXTURES = new Set([
-  "grandparent-scam",
-  "spanish-grandparent-scam",
-  "bank-impersonation",
-  "romance-pig-butchering",
-]);
+// Fixtures that involve a payment → show the Transaction Shield, with the
+// amount/recipient that fits each scam so the demo reads true to life.
+const MONEY_FIXTURES: Record<string, { amount: string; recipient: string }> = {
+  "grandparent-scam": { amount: "$4,000.00", recipient: "Bail Bonds Wire — Acct ****7781" },
+  "spanish-grandparent-scam": { amount: "$4,000.00", recipient: "Transferencia Fianza — ****7781" },
+  "bank-impersonation": { amount: "$2,300.00", recipient: "“Secure Account” — Acct ****2210" },
+  "romance-pig-butchering": { amount: "$1,000.00", recipient: "Crypto Wallet — bc1q…f4k2" },
+  "tech-support-scam": { amount: "$299.00", recipient: "Apple Gift Cards ×3" },
+  "crypto-investment-scam": { amount: "$500.00", recipient: "BTC Wallet — bc1q…9xz7" },
+  "job-offer-scam": { amount: "$150.00", recipient: "“Onboarding Fee” — Gift Card" },
+  "sextortion-scam": { amount: "$1,500.00", recipient: "BTC Wallet — bc1q…k8d3" },
+};
 
 export default function Guardian() {
   const [mode, setMode] = useState<"simulate" | "paste">("simulate");
@@ -90,7 +95,7 @@ export default function Guardian() {
     setAlert("idle");
     setAlertChannel("mock");
     // Pending transfer is shown only for money-related scams.
-    setShield(fixtureId && MONEY_FIXTURES.has(fixtureId) ? "pending" : "idle");
+    setShield(fixtureId && fixtureId in MONEY_FIXTURES ? "pending" : "idle");
   }
 
   const analyze = useCallback(async (conversation: string, meta?: { channel?: string; caller?: string }) => {
@@ -134,7 +139,7 @@ export default function Guardian() {
         if (!cancelRef.current) {
           setResult(data);
           // Intervene the moment risk crosses into danger.
-          if (data.riskScore >= DANGER_THRESHOLD && MONEY_FIXTURES.has(activeFixture.id)) {
+          if (data.riskScore >= DANGER_THRESHOLD && activeFixture.id in MONEY_FIXTURES) {
             void fireIntervention(data.plainLanguageSummary);
           }
         }
@@ -304,7 +309,13 @@ export default function Guardian() {
           {/* Intervention layer — the cross-theme payoff */}
           {(shield !== "idle" || alert !== "idle") && (
             <div className="space-y-3">
-              {shield !== "idle" && <TransactionShield state={shield} />}
+              {shield !== "idle" && (
+                <TransactionShield
+                  state={shield}
+                  amount={MONEY_FIXTURES[activeFixture.id]?.amount}
+                  recipient={MONEY_FIXTURES[activeFixture.id]?.recipient}
+                />
+              )}
               {alert !== "idle" && <TrustedCircle state={alert} channel={alertChannel} />}
             </div>
           )}

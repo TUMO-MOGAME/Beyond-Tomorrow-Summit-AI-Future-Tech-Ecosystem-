@@ -2,7 +2,7 @@
 
 Aegis ships with an automated test harness that exercises the live API end-to-end:
 the route handler, input validation, the Scam DNA Engine contract, and the alert
-endpoint. **39 checks, all passing** — locally and against the production deployment.
+endpoint. **57 checks, all passing** — locally and against the production deployment.
 
 ## Run it
 
@@ -24,7 +24,7 @@ AEGIS_URL="https://beyond-tomorrow-summit-ai-future-te.vercel.app" npm test
 
 | Area | Checks |
 |---|---|
-| **All 5 fixtures** | grandparent (EN), grandparent (ES), bank impersonation, romance/pig-butchering, and the benign control |
+| **All 9 fixtures** | grandparent (EN), grandparent (ES), bank impersonation, romance/pig-butchering, tech-support, crypto investment, fake job-offer, sextortion, and the benign control |
 | **Correctness** | known scams escalate to caution/danger with quoted tactics + a recommended action |
 | **No false alarms** | the normal family call returns `safe` with 0 tactics |
 | **Schema integrity** | `riskScore` is an int 0–100, `verdict` in enum, every tactic has name/severity/quote/explanation, severity in enum |

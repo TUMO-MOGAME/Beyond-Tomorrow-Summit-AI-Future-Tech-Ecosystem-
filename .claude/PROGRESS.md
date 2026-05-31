@@ -9,8 +9,9 @@
 
 **Phase:** Build complete & hardened → moving toward submission + Round 2.
 **Live:** https://beyond-tomorrow-summit-ai-future-te.vercel.app/ (running in **mock** mode — API key not yet on Vercel)
-**Tests:** 37/37 passing (`npm test`)
-**Latest commit:** `c00f103` — bank-impersonation false-negative fix
+**Tests:** 57/57 passing (`npm test`)
+**Fixtures:** 9 (grandparent EN/ES, bank, romance, tech-support, crypto, job-offer, sextortion, safe control)
+**Latest commit:** see `git log` — added 4 scam fixtures + detection
 
 ### ✅ Done
 - [x] Day 1 — Provider-agnostic Scam DNA Engine (Claude/OpenAI/mock) + `/api/analyze`
@@ -43,6 +44,12 @@ fixtures for demo breadth. (User to choose.)
 ---
 
 ## Session log
+
+### 2026-05-31 — Demo breadth: +4 scam fixtures
+- Added tech-support, crypto-investment, fake job-offer, sextortion fixtures (9 total).
+- New mock tactics: Advance-Fee Demand, Blackmail/Extortion, Remote-Access/Malware; extended Too-Good + Secrecy.
+- Transaction Shield now shows scam-appropriate amount/recipient per fixture (MONEY_FIXTURES → Record).
+- Tests 37 → **57/57 pass**. Caught a stale-build race (always full `npm run build` before `npm run start`).
 
 ### 2026-05-31 — Project memory setup
 - Created `CLAUDE.md` (auto-loaded) + `.claude/PROGRESS.md` (this) + `.claude/settings.json`.

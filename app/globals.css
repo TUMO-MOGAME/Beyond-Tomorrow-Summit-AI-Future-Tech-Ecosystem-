@@ -3,17 +3,100 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
-
-html,
-body {
-  background-color: #0a0e1a;
-  color: #e5e9f0;
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #161311;
+  color: #ece4d6;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Atmospheric depth: two soft warm light sources, fixed behind everything.
+   Keeps the dark theme from reading as a flat black void. */
+body {
+  position: relative;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(60rem 60rem at 12% -8%, rgba(216, 168, 75, 0.1), transparent 60%),
+    radial-gradient(50rem 50rem at 108% 8%, rgba(136, 178, 154, 0.07), transparent 55%),
+    radial-gradient(70rem 50rem at 50% 120%, rgba(206, 107, 74, 0.05), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* Fine film grain so surfaces feel like material, not screen. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* keep app content above the grain layer */
+main,
+nav,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: rgba(216, 168, 75, 0.28);
+  color: #fff;
+}
+
+/* Display type: optical sizing + tight tracking gives the editorial feel. */
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+
+/* Hairline frame used across panels. */
+.panel {
+  background-color: #1e1a16;
+  border: 1px solid #352e25;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.02) inset,
+    0 18px 40px -24px rgba(0, 0, 0, 0.7);
+}
+
+/* Uppercase instrument labels (telemetry / section eyebrows). */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6e665a;
+}
+
+/* Tasteful scrollbars inside dark panels. */
+.scroll-soft::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-soft::-webkit-scrollbar-thumb {
+  background: #473e31;
+  border-radius: 999px;
+}
+.scroll-soft::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hand-tuned focus ring in the brand accent. */
+.focus-gold:focus {
+  outline: none;
+  border-color: #9a7c38;
+  box-shadow: 0 0 0 3px rgba(216, 168, 75, 0.18);
 }

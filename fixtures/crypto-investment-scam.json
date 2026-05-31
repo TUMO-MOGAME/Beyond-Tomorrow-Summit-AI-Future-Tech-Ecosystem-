@@ -1,0 +1,14 @@
+{
+  "id": "crypto-investment-scam",
+  "title": "Crypto 'Guaranteed Returns' Scam",
+  "channel": "chat",
+  "caller": "an 'investment advisor' from a messaging group",
+  "lines": [
+    { "speaker": "Advisor", "text": "Welcome to the VIP signals group! Our members are making 300% returns this month with zero risk." },
+    { "speaker": "You", "text": "300%? That sounds high." },
+    { "speaker": "Advisor", "text": "It's guaranteed. Our AI trading bot never loses. I'll personally mentor you so you don't miss out." },
+    { "speaker": "Advisor", "text": "Just deposit $500 in Bitcoin to this wallet to activate your account. The more you put in, the more you make." },
+    { "speaker": "You", "text": "Can I withdraw anytime?" },
+    { "speaker": "Advisor", "text": "Of course! But this bonus window closes in one hour — act now. Don't tell your bank, they don't understand crypto and will only slow you down." }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "job-offer-scam",
+  "title": "Fake Remote Job-Offer Scam",
+  "channel": "sms",
+  "caller": "a 'recruiter' offering easy remote work",
+  "lines": [
+    { "speaker": "Recruiter", "text": "Congratulations! You've been selected for a remote data-entry job paying $500 per day. No experience needed." },
+    { "speaker": "You", "text": "I didn't apply for this. How did you get my number?" },
+    { "speaker": "Recruiter", "text": "Your profile matched our requirements. To start, we just need a small onboarding fee of $150 for your equipment and training kit." },
+    { "speaker": "Recruiter", "text": "Once you pay, your first paycheck will arrive in 24 hours. This offer is only available today." },
+    { "speaker": "You", "text": "Why do I have to pay to get a job?" },
+    { "speaker": "Recruiter", "text": "It's fully refundable with your first salary. Send it via gift card or crypto and I'll secure your spot before someone else takes it." }
+  ]
+}
