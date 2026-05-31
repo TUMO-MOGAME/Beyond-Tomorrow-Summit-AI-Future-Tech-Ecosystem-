@@ -23,6 +23,8 @@ export const TWILIO_TOKEN = process.env.TWILIO_AUTH_TOKEN || "";
 export const TWILIO_NUMBER = process.env.TWILIO_NUMBER || process.env.TWILIO_FROM_NUMBER || "";
 /** The protected person's phone — rung into the conference so they can talk. */
 export const SENIOR_NUMBER = process.env.AEGIS_SENIOR_NUMBER || "";
+/** The protected person's name — used to personalize alerts to loved ones. */
+export const SENIOR_NAME = process.env.AEGIS_SENIOR_NAME || "your family member";
 /** Trusted Circle numbers (comma-separated) dialed in when risk is high. */
 export const TRUSTED_NUMBERS = (process.env.AEGIS_TRUSTED_NUMBERS || "")
   .split(",")
@@ -240,11 +242,12 @@ async function intervene(callSid: string, summary: string): Promise<void> {
     if (sid) state.familyCallSids.add(sid);
   }
 
-  // 3. Alert the Trusted Circle out-of-band (email via existing route + SMS).
+  // 3. Alert the Trusted Circle out-of-band (personalized email to each loved
+  //    one via the alert route + SMS to each number).
   void fetch(url("/api/alert"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ protectedName: "your family member", summary }),
+    body: JSON.stringify({ protectedName: SENIOR_NAME, summary }),
   }).catch(() => {});
   const smsBody = `Aegis: a likely scam is targeting your family member on a call right now. ${summary} Please call them.`;
   for (const num of TRUSTED_NUMBERS) {
