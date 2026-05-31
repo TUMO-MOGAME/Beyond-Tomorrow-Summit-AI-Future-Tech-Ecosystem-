@@ -35,3 +35,6 @@ coverage/
 .turbo
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code — keep project memory tracked, ignore local/personal settings
+.claude/settings.local.json
