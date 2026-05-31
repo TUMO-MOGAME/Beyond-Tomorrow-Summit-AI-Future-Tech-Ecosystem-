@@ -9,7 +9,7 @@
 
 **Phase:** Build complete & hardened → moving toward submission + Round 2.
 **Live:** https://beyond-tomorrow-summit-ai-future-te.vercel.app/ (running in **mock** mode — API key not yet on Vercel)
-**Tests:** 57/57 passing (`npm test`)
+**Tests:** 53/53 passing (`npm test`)
 **Fixtures:** 9 (grandparent EN/ES, bank, romance, tech-support, crypto, job-offer, sextortion, safe control)
 **Latest commit:** see `git log` — added 4 scam fixtures + detection
 
@@ -49,7 +49,7 @@ fixtures for demo breadth. (User to choose.)
 - Added tech-support, crypto-investment, fake job-offer, sextortion fixtures (9 total).
 - New mock tactics: Advance-Fee Demand, Blackmail/Extortion, Remote-Access/Malware; extended Too-Good + Secrecy.
 - Transaction Shield now shows scam-appropriate amount/recipient per fixture (MONEY_FIXTURES → Record).
-- Tests 37 → **57/57 pass**. Caught a stale-build race (always full `npm run build` before `npm run start`).
+- Tests 37 → **53/53 pass**. Caught a stale-build race (always full `npm run build` before `npm run start`).
 
 ### 2026-05-31 — Project memory setup
 - Created `CLAUDE.md` (auto-loaded) + `.claude/PROGRESS.md` (this) + `.claude/settings.json`.

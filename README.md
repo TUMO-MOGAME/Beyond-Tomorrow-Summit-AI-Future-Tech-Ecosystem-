@@ -87,7 +87,7 @@ Open http://localhost:3000 and click **Try the Guardian**.
 
 ## 🧪 Testing
 
-Aegis has an automated test harness — **57 checks** covering all 9 scam fixtures,
+Aegis has an automated test harness — **53 checks** covering all 9 scam fixtures,
 schema integrity, multilingual detection, false-positive prevention, edge cases, and
 adversarial input. All passing locally and in production.
 
