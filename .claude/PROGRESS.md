@@ -26,7 +26,7 @@
 
 **Phase:** Build complete & hardened → moving toward submission + Round 2.
 **Live:** https://beyond-tomorrow-summit-ai-future-te.vercel.app/ (running in **mock** mode — API key not yet on Vercel)
-**Tests:** 53/53 passing (`npm test`)
+**Tests:** 61/61 passing (`npm test`) — engine, alerts, voice routes
 **Fixtures:** 9 (grandparent EN/ES, bank, romance, tech-support, crypto, job-offer, sextortion, safe control)
 **Latest commit:** see `git log` — added 4 scam fixtures + detection
 

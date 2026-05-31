@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ingestUtterance, twiml } from "@/lib/voice";
+import { ingestUtterance, twiml, readTwilioForm, verifyTwilioSignature } from "@/lib/voice";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,15 +10,17 @@ export const dynamic = "force-dynamic";
  * (inside ingestUtterance) intervene the moment risk crosses the threshold.
  */
 export async function POST(req: Request) {
-  const callSid =
-    new URL(req.url).searchParams.get("callSid") || "";
-  const form = await req.formData().catch(() => null);
-  const event = (form?.get("TranscriptionEvent") as string) || "";
+  const params = await readTwilioForm(req);
+  if (!verifyTwilioSignature(req.url, params, req.headers.get("x-twilio-signature") || "")) {
+    return new NextResponse("Invalid Twilio signature", { status: 403 });
+  }
+  const callSid = new URL(req.url).searchParams.get("callSid") || params.CallSid || "";
+  const event = params.TranscriptionEvent || "";
 
   if (event === "transcription-content" && callSid) {
     let text = "";
     try {
-      text = JSON.parse((form?.get("TranscriptionData") as string) || "{}").transcript || "";
+      text = JSON.parse(params.TranscriptionData || "{}").transcript || "";
     } catch {
       /* ignore malformed payloads */
     }

@@ -59,7 +59,7 @@ Zod (validation) · Vercel (deploy) · GitHub. Python only for `scripts/build_de
 | `app/care/page.tsx` | Care Mode setup (zero-effort elderly story) |
 | `components/` | RiskMeter, TacticCard, VerdictBanner, TranscriptFeed, TransactionShield, TrustedCircle, AegisLogo, Icon (line-icon set), Photo (framed next/image) |
 | `fixtures/` | grandparent (EN+ES), bank, romance, safe-control |
-| `scripts/test_engine.mjs` | 37-check test suite (`npm test`) |
+| `scripts/test_engine.mjs` | 61-check test suite (`npm test`) — engine, alerts, voice routes |
 | `public/images/` | Human photography used on the site (see `CREDITS.md`); referenced via `/images/*` |
 | `assets/unused-photos/` | Source photos we chose **not** to ship (kept, not served) |
 
@@ -101,7 +101,7 @@ Auto-detect order: **anthropic → groq → gemini → openrouter → openai →
 
 ## Status — see [.claude/PROGRESS.md](.claude/PROGRESS.md) for the live log
 
-**Build: COMPLETE & hardened.** Days 1–5 done. 37/37 tests pass. Deployed live.
+**Build: COMPLETE & hardened.** Days 1–5 done. 61/61 tests pass. Deployed live.
 **Remaining (mostly user-side execution):** add API key to Vercel · capture screenshots ·
 record demo video · submit on Devpost · rehearse Round 2 pitch.
 

@@ -138,6 +138,55 @@ async function main() {
   const alertEmpty = await fetch(`${BASE}/api/alert`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
   check("alert {} -> 200", alertEmpty.status === 200, `(got ${alertEmpty.status})`);
 
+  const multi = await fetch(`${BASE}/api/alert`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      protectedName: "Margaret",
+      summary: "test",
+      contacts: [
+        { name: "Sarah", email: "sarah@example.com" },
+        { name: "John", email: "john@example.com" },
+      ],
+    }),
+  });
+  const multiBody = await multi.json();
+  check(
+    "alert -> emails ALL loved ones (multi-recipient)",
+    Array.isArray(multiBody.recipients) && multiBody.recipients.length === 2,
+    `(got ${JSON.stringify(multiBody.recipients)})`
+  );
+
+  // 6) Voice (Guardian Number) call-screening endpoints — mock-safe (no Twilio).
+  console.log("\nVoice endpoints:");
+  const form = (obj) =>
+    new URLSearchParams(Object.entries(obj).map(([k, v]) => [k, String(v)])).toString();
+  const postForm = (path, obj) =>
+    fetch(`${BASE}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: form(obj),
+    });
+
+  const incoming = await postForm("/api/voice/incoming", { CallSid: "CAtest", From: "+15550001111" });
+  const incomingXml = await incoming.text();
+  check("voice/incoming -> 200", incoming.status === 200, `(got ${incoming.status})`);
+  check("voice/incoming -> consent disclosure", /may be monitored/i.test(incomingXml));
+  check("voice/incoming -> starts transcription", /<Transcription/.test(incomingXml));
+  check("voice/incoming -> joins a conference", /<Conference/.test(incomingXml));
+
+  const joinRes = await postForm("/api/voice/join?conf=aegis-CAtest", {});
+  check("voice/join -> conference TwiML", joinRes.status === 200 && /<Conference/.test(await joinRes.text()));
+
+  const fallback = await postForm("/api/voice/fallback", {});
+  check("voice/fallback -> hangs up safely", /<Hangup\s*\/?>/.test(await fallback.text()));
+
+  const transcript = await postForm("/api/voice/transcript?callSid=CAtest", {
+    TranscriptionEvent: "transcription-content",
+    TranscriptionData: JSON.stringify({ transcript: "hello there" }),
+  });
+  check("voice/transcript -> 200", transcript.status === 200, `(got ${transcript.status})`);
+
   // ── summary
   console.log(`\n${"=".repeat(48)}`);
   console.log(`RESULT: ${pass} passed, ${fail} failed`);

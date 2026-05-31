@@ -59,12 +59,20 @@ Warn user   Alert Trusted     Freeze the
 on-screen   Circle (family)   transaction
 ```
 
+> **Real-world delivery — the "Guardian Number".** A third-party app can't legally tap a live
+> cellular call (iOS forbids it; Android is metadata-only). So in production Aegis routes
+> **unknown** callers through a Twilio number (known/favourite contacts are never monitored),
+> transcribes the caller live, runs the Scam DNA Engine, and on high risk **holds the call,
+> conferences in a loved one, and alerts the family**. See
+> [docs/11_PRODUCT_DIRECTION.md](docs/11_PRODUCT_DIRECTION.md) (researched, cited) and
+> [docs/12_TWILIO_SETUP.md](docs/12_TWILIO_SETUP.md). A working prototype lives in `app/api/voice/*`.
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
 | Frontend | Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, Framer Motion |
-| AI Engine | LLM (OpenAI / Claude) with structured output · the "Scam DNA Engine" |
+| AI Engine | Provider-agnostic LLM with structured output — Claude / OpenAI / **Groq / Gemini / OpenRouter (free)** / offline mock · the "Scam DNA Engine" |
 | Voice authenticity | Hugging Face synthetic-voice detection model |
 | Speech-to-text | AssemblyAI / Whisper |
 | Alerts | Twilio (SMS) / Resend (email) |
@@ -87,9 +95,10 @@ Open http://localhost:3000 and click **Try the Guardian**.
 
 ## 🧪 Testing
 
-Aegis has an automated test harness — **53 checks** covering all 9 scam fixtures,
-schema integrity, multilingual detection, false-positive prevention, edge cases, and
-adversarial input. All passing locally and in production.
+Aegis has an automated test harness — **61 checks** covering all 9 scam fixtures,
+schema integrity, multilingual detection, false-positive prevention, edge cases,
+adversarial input, multi-recipient alerts, and the voice call-screening endpoints.
+All passing locally and in production.
 
 ```bash
 npm run start   # start the app (mock engine needs no key)

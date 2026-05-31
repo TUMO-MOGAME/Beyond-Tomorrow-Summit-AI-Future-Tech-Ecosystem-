@@ -1,5 +1,13 @@
 import { NextResponse } from "next/server";
-import { initCall, incomingTwiml, dialIntoConference, getCall, SENIOR_NUMBER } from "@/lib/voice";
+import {
+  initCall,
+  incomingTwiml,
+  dialIntoConference,
+  getCall,
+  SENIOR_NUMBER,
+  readTwilioForm,
+  verifyTwilioSignature,
+} from "@/lib/voice";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -13,9 +21,12 @@ const xml = (body: string) => new NextResponse(body, { headers: { "Content-Type"
  * conference so it feels like a normal call.
  */
 export async function POST(req: Request) {
-  const form = await req.formData().catch(() => null);
-  const callSid = (form?.get("CallSid") as string) || `sim-${Date.now()}`;
-  const from = (form?.get("From") as string) || "unknown";
+  const params = await readTwilioForm(req);
+  if (!verifyTwilioSignature(req.url, params, req.headers.get("x-twilio-signature") || "")) {
+    return new NextResponse("Invalid Twilio signature", { status: 403 });
+  }
+  const callSid = params.CallSid || `sim-${Date.now()}`;
+  const from = params.From || "unknown";
 
   const state = initCall(callSid, from);
 

@@ -38,16 +38,6 @@ const config: Config = {
         sage: "#7FD6A6", // safe
         caution: "#E0B448", // caution
         clay: "#F0613F", // danger
-        // back-compat aliases so legacy class names keep resolving
-        aegis: {
-          bg: "#000000",
-          panel: "#0B0B0C",
-          border: "#242427",
-          accent: "#FFFFFF",
-          safe: "#7FD6A6",
-          caution: "#E0B448",
-          danger: "#F0613F",
-        },
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],

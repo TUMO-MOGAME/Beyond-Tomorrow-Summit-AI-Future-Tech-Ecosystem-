@@ -15,6 +15,7 @@
  * `next start` process (how you'll demo this) but is ephemeral and not shared
  * across serverless instances. A real deployment swaps this for Redis/Postgres.
  */
+import crypto from "node:crypto";
 import { analyzeConversation } from "./llm";
 
 // ─── Config ──────────────────────────────────────────────────────────────────
@@ -44,6 +45,46 @@ export function twilioConfigured(): boolean {
 export function url(path: string): string {
   // Absolute URL for Twilio webhooks; falls back to a relative path if unset.
   return PUBLIC_URL ? `${PUBLIC_URL}${path}` : path;
+}
+
+/**
+ * Verify a request really came from Twilio (HMAC-SHA1 of the full URL + sorted
+ * POST params, keyed by the auth token). OPT-IN: only enforced when
+ * AEGIS_VERIFY_TWILIO=1 and an auth token + public URL are configured — so local
+ * testing and the mock demo are never blocked. Reconstructs the signed URL from
+ * AEGIS_PUBLIC_URL so it matches what Twilio computed (request host may be proxied).
+ * Returns true (allow) unless verification is enabled and the signature is bad.
+ */
+export function verifyTwilioSignature(
+  reqUrl: string,
+  params: Record<string, string>,
+  signature: string
+): boolean {
+  if (process.env.AEGIS_VERIFY_TWILIO !== "1") return true;
+  if (!TWILIO_TOKEN || !PUBLIC_URL) return true;
+
+  const { pathname, search } = new URL(reqUrl);
+  const fullUrl = `${PUBLIC_URL}${pathname}${search}`;
+  const data = Object.keys(params)
+    .sort()
+    .reduce((acc, key) => acc + key + params[key], fullUrl);
+  const expected = crypto
+    .createHmac("sha1", TWILIO_TOKEN)
+    .update(Buffer.from(data, "utf-8"))
+    .digest("base64");
+
+  try {
+    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+  } catch {
+    return false; // length mismatch / malformed signature
+  }
+}
+
+/** Read a Twilio form POST into a plain object (for both logic and verification). */
+export async function readTwilioForm(req: Request): Promise<Record<string, string>> {
+  const form = await req.formData().catch(() => null);
+  if (!form) return {};
+  return Object.fromEntries([...form].map(([k, v]) => [k, String(v)]));
 }
 
 // ─── In-memory call state ──────────────────────────────────────────────────────

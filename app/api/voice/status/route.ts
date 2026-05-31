@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCall } from "@/lib/voice";
+import { getCall, readTwilioForm, verifyTwilioSignature } from "@/lib/voice";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,11 +10,14 @@ export const dynamic = "force-dynamic";
  * cancels the no-answer fallback).
  */
 export async function POST(req: Request) {
+  const params = await readTwilioForm(req);
+  if (!verifyTwilioSignature(req.url, params, req.headers.get("x-twilio-signature") || "")) {
+    return new NextResponse("Invalid Twilio signature", { status: 403 });
+  }
   const callSid = new URL(req.url).searchParams.get("callSid") || "";
-  const form = await req.formData().catch(() => null);
-  const event = (form?.get("StatusCallbackEvent") as string) || "";
-  const conferenceSid = (form?.get("ConferenceSid") as string) || "";
-  const participantCallSid = (form?.get("CallSid") as string) || "";
+  const event = params.StatusCallbackEvent || "";
+  const conferenceSid = params.ConferenceSid || "";
+  const participantCallSid = params.CallSid || "";
 
   const state = getCall(callSid);
   if (state) {

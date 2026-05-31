@@ -1,8 +1,9 @@
 # 🧪 Aegis — Testing
 
 Aegis ships with an automated test harness that exercises the live API end-to-end:
-the route handler, input validation, the Scam DNA Engine contract, and the alert
-endpoint. **53 checks, all passing** — locally and against the production deployment.
+the route handler, input validation, the Scam DNA Engine contract, the alert
+endpoint, and the voice call-screening routes. **61 checks, all passing** — locally
+and against the production deployment.
 
 ## Run it
 
