@@ -73,8 +73,9 @@ The UI is monochrome on purpose so the **people in the photos** carry the warmth
 ## Plan docs (now in [`docs/`](docs/) — see [docs/README.md](docs/README.md) for the index)
 `docs/00_MASTER_PLAN` · `01_BUILD_SPEC` · `02_TIMELINE` · `03_SUBMISSION_PACKAGE` ·
 `04_PITCH_DECK` · `05_DEMO_VIDEO_SCRIPT` · `06_SKILLS_AND_TOOLS` · `07_DEPLOY_GUIDE` ·
-`08_VIDEO_TELEPROMPTER` · `09_SUBMISSION_CHECKLIST` · `10_ROUND2_PITCH` · `TESTING.md` ·
-`Aegis_Pitch_Deck.pptx`
+`08_VIDEO_TELEPROMPTER` · `09_SUBMISSION_CHECKLIST` · `10_ROUND2_PITCH` ·
+`11_PRODUCT_DIRECTION` (researched pivot → Guardian Number call-screening) ·
+`12_TWILIO_SETUP` (run the voice prototype) · `TESTING.md` · `Aegis_Pitch_Deck.pptx`
 
 ---
 

@@ -11,6 +11,8 @@ The app's own README lives in the [repo root](../README.md).
 | 02 | [Timeline](02_TIMELINE.md) | Day-by-day build schedule |
 | 06 | [Skills & tools](06_SKILLS_AND_TOOLS.md) | Stack and tooling decisions |
 | 07 | [Deploy guide](07_DEPLOY_GUIDE.md) | Vercel deploy + env keys |
+| 11 | [Product direction](11_PRODUCT_DIRECTION.md) | **Researched pivot** — the "Guardian Number" call-screening architecture, feasibility, legal & privacy, prototype plan |
+| 12 | [Twilio setup](12_TWILIO_SETUP.md) | Run the voice call-screening prototype (`app/api/voice/*`) |
 | — | [Testing](TESTING.md) | Test suite & how to run it |
 
 ## Submission & pitch

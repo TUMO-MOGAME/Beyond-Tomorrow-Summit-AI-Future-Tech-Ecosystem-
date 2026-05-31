@@ -5,6 +5,23 @@
 
 ---
 
+## 📍 Session 2026-05-31 (pm) — redesign + free models + Guardian Number pivot
+
+- **UI redesign:** "Pure mono" theme (true black/white, fonts Fraunces+Hanken+JetBrains Mono),
+  custom `Icon` set (no emoji), human photography (`Photo`, `public/images/*.webp`), warmer copy.
+- **Free-model engine:** `lib/llm.ts` now supports Groq/Gemini/OpenRouter/any OpenAI-compatible
+  endpoint with a tiered JSON strategy. Auto-detect anthropic→groq→gemini→openrouter→openai→mock.
+- **Structure:** planning docs moved into `docs/` (+ `docs/README.md` index).
+- **Researched pivot (deep-research, cited):** an app can't tap live call audio (iOS/Android) →
+  route unknown calls through **Twilio** ("Guardian Number"). See `docs/11_PRODUCT_DIRECTION.md`.
+- **Phase 1a prototype built:** `lib/voice.ts` + `app/api/voice/{incoming,join,transcript,hold,
+  fallback,status}` — consent → live transcription → Scam DNA Engine → hold + conference family
+  + email/SMS + no-answer fallback. Degrades to mock without Twilio creds (verified: risk 100 →
+  INTERVENING → mock Twilio Calls/Messages). Setup: `docs/12_TWILIO_SETUP.md`.
+- **Next:** add a real model key + Twilio trial number to demo the voice flow with verified phones.
+
+---
+
 ## 📍 Current status (as of 2026-05-31)
 
 **Phase:** Build complete & hardened → moving toward submission + Round 2.
