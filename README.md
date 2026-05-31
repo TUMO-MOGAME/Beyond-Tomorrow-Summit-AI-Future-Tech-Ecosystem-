@@ -10,6 +10,8 @@
 
 Built for the **Beyond Tomorrow Summit Hackathon 2026** · *Code the Future. Shape the World.*
 
+### 🔗 [**Live Demo →**](https://beyond-tomorrow-summit-ai-future-te.vercel.app/) &nbsp;·&nbsp; [Try the Guardian](https://beyond-tomorrow-summit-ai-future-te.vercel.app/guardian)
+
 </div>
 
 ---
@@ -80,6 +82,8 @@ npm run dev
 ```
 
 Open http://localhost:3000 and click **Try the Guardian**.
+
+> **Or skip setup — try it live:** [beyond-tomorrow-summit-ai-future-te.vercel.app](https://beyond-tomorrow-summit-ai-future-te.vercel.app/)
 
 ## 👵 Care Mode — protection with zero effort from the senior
 

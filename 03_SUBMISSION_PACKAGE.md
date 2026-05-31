@@ -95,11 +95,11 @@ AI / ML: Claude (Anthropic) LLM, structured output, prompt engineering · Speech
 
 ---
 
-## Links (fill in)
-- **GitHub Repository (public):** [https://github.com/<you>/aegis]
-- **Live Demo:** [https://aegis-<you>.vercel.app]
-- **Demo Video (≤3 min):** [YouTube unlisted link]
-- **Pitch Deck:** [link]
+## Links
+- **GitHub Repository (public):** https://github.com/TUMO-MOGAME/Beyond-Tomorrow-Summit-AI-Future-Tech-Ecosystem-
+- **Live Demo:** https://beyond-tomorrow-summit-ai-future-te.vercel.app/
+- **Demo Video (≤3 min):** [YouTube unlisted link — record next]
+- **Pitch Deck:** Aegis_Pitch_Deck.pptx (in repo) — [or upload + link]
 
 ---
 
