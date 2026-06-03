@@ -102,6 +102,13 @@ export default function Home() {
               Protect someone you love
             </Link>
           </div>
+          <Link
+            href="/call"
+            className="mt-5 inline-flex items-center gap-1.5 text-sm text-sand transition hover:text-cream"
+          >
+            <Icon name="broadcast" size={15} className="text-gold" /> Watch Aegis screen a live call
+            <Icon name="arrow-right" size={14} />
+          </Link>
         </div>
 
         {/* Hero scene — a real person on a device, with the product moment overlaid */}

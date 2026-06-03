@@ -12,5 +12,7 @@ monochrome design. 1280px wide.
 | `05-guardian-danger-held.png` | Peak — Transaction Shield **HELD BY AEGIS** + Trusted Circle alert + tactics |
 | `06-guardian-spanish.png` | Spanish voice-clone scam detected (multilingual) |
 | `07-guardian-safe.png` | Normal family call → **SAFE** (no false alarm) |
+| `08-call-conferencing.png` | `/call` Guardian Number — caller held, ringing the Trusted Circle |
+| `09-call-joined.png` | `/call` — loved one joined the call, crisis handled (no money moved) |
 
 Re-generate anytime by running the Playwright capture against the live site.

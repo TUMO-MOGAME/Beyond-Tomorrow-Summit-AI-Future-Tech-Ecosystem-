@@ -215,6 +215,13 @@ export default function Guardian() {
         Aegis analyzes the conversation line-by-line and intervenes the moment risk crosses into
         danger — before the money is gone.
       </p>
+      <Link
+        href="/call"
+        className="mt-3 inline-flex items-center gap-1.5 text-sm text-gold-soft transition hover:text-cream"
+      >
+        <Icon name="broadcast" size={15} /> See the real phone-call flow (Guardian Number)
+        <Icon name="arrow-right" size={15} />
+      </Link>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
         {/* LEFT: input / transcript */}
