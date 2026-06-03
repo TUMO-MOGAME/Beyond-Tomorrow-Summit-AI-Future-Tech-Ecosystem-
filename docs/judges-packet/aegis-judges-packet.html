@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aegis — Judges' Packet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#000;
+    --paper:#fff;
+    --g1:#111;
+    --g2:#3a3a3a;
+    --g3:#6b6b6b;
+    --g4:#9a9a9a;
+    --g5:#c9c9c9;
+    --g6:#e7e7e7;
+    --line:#dcdcdc;
+    --safe:#1f9d55;
+    --caution:#c98a00;
+    --danger:#d6322e;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Hanken Grotesk',-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  @page{ size:A4; margin:0; }
+  html,body{ background:var(--paper); color:var(--ink); font-family:var(--sans); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  .page{
+    width:210mm; min-height:297mm; padding:18mm 18mm 16mm;
+    position:relative; page-break-after:always; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .page:last-child{ page-break-after:auto; }
+
+  /* running header / footer */
+  .runner{ display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--g4); }
+  .runner .dot{ display:inline-block; width:5px; height:5px; background:var(--ink); border-radius:50%; margin-right:7px; vertical-align:middle;}
+  .footer{ margin-top:auto; padding-top:10mm; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:8px; letter-spacing:.12em; text-transform:uppercase; color:var(--g4); }
+
+  h1,h2,h3{ font-family:var(--serif); font-weight:600; letter-spacing:-.01em; line-height:1.02; }
+  .eyebrow{ font-family:var(--mono); font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--g3); }
+  p{ line-height:1.5; color:var(--g1); }
+
+  /* ---------- COVER ---------- */
+  .cover{ justify-content:flex-start; }
+  .brandrow{ display:flex; align-items:center; gap:14px; }
+  .mark{ width:34px; height:42px; }
+  .wordmark{ font-family:var(--serif); font-weight:700; font-size:26px; letter-spacing:.02em; }
+  .cover-hero{ margin-top:44mm; }
+  .cover-hero .kicker{ font-family:var(--mono); font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--g3); margin-bottom:18px;}
+  .cover-hero h1{ font-size:62px; line-height:.96; font-weight:600; letter-spacing:-.02em; }
+  .cover-hero .sub{ font-family:var(--serif); font-style:italic; font-weight:400; font-size:23px; color:var(--g2); margin-top:18px; }
+  .cover-hero .lede{ font-size:14px; max-width:118mm; margin-top:16px; color:var(--g2); line-height:1.55; }
+
+  .intersection{ display:flex; gap:0; margin-top:34px; border:1px solid var(--line); }
+  .intersection div{ flex:1; padding:14px 16px; border-right:1px solid var(--line); }
+  .intersection div:last-child{ border-right:0; }
+  .intersection .t{ font-family:var(--mono); font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--g4); }
+  .intersection .v{ font-family:var(--serif); font-size:15px; margin-top:5px; }
+
+  .meta-grid{ margin-top:auto; display:grid; grid-template-columns:1fr 1fr; gap:0 32px; border-top:1px solid var(--ink); padding-top:14px;}
+  .meta-grid .cell{ padding:9px 0; border-bottom:1px solid var(--line); }
+  .meta-grid .k{ font-family:var(--mono); font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--g4); }
+  .meta-grid .val{ font-size:12px; margin-top:3px; color:var(--ink); word-break:break-all; }
+
+  /* ---------- SECTION HEADS ---------- */
+  .secthead{ margin-bottom:20px; }
+  .secthead .num{ font-family:var(--mono); font-size:10px; letter-spacing:.2em; color:var(--g4); }
+  .secthead h2{ font-size:30px; margin-top:6px; }
+  .secthead .dek{ font-size:13px; color:var(--g2); margin-top:8px; max-width:135mm; line-height:1.5; }
+
+  /* stat band */
+  .stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; border:1px solid var(--line); margin:6px 0 14px;}
+  .stats .s{ padding:15px 18px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .stats .s:nth-child(2n){ border-right:0; }
+  .stats .s:nth-last-child(-n+2){ border-bottom:0; }
+  .stats .big{ font-family:var(--serif); font-size:34px; font-weight:600; line-height:1; }
+  .stats .lab{ font-size:11px; color:var(--g2); margin-top:8px; line-height:1.4; }
+  .stats .src{ font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--g4); margin-top:6px;}
+
+  .fail{ margin-top:6px; }
+  .fail .row{ display:flex; gap:16px; padding:13px 0; border-top:1px solid var(--line); }
+  .fail .row:last-child{ border-bottom:1px solid var(--line); }
+  .fail .idx{ font-family:var(--mono); font-size:11px; color:var(--g4); width:26px; flex:none; padding-top:3px;}
+  .fail .ft{ font-family:var(--serif); font-size:16px; width:46mm; flex:none; }
+  .fail .fb{ font-size:12px; color:var(--g2); line-height:1.5; }
+
+  /* ---------- ARCHITECTURE FLOW ---------- */
+  .flow{ display:flex; flex-direction:column; gap:0; margin:4px 0 16px; }
+  .step{ display:flex; align-items:flex-start; gap:16px; padding:13px 0; border-top:1px solid var(--line); }
+  .step:last-child{ border-bottom:1px solid var(--line); }
+  .step .n{ font-family:var(--mono); font-size:10px; color:var(--paper); background:var(--ink); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;}
+  .step .body h3{ font-size:16px; font-weight:600; }
+  .step .body p{ font-size:11.5px; color:var(--g2); margin-top:4px; line-height:1.45; }
+  .step .tag{ font-family:var(--mono); font-size:8px; letter-spacing:.12em; text-transform:uppercase; color:var(--g4); margin-left:auto; flex:none; padding-top:4px;}
+
+  /* risk meter visual */
+  .meter{ border:1px solid var(--line); padding:16px 18px; margin-bottom:16px; }
+  .meter .top{ display:flex; justify-content:space-between; align-items:baseline; }
+  .meter .score{ font-family:var(--serif); font-size:30px; font-weight:600; }
+  .meter .score em{ font-style:normal; font-size:14px; color:var(--g4); }
+  .meter .verdict{ font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--danger); border:1px solid var(--danger); padding:5px 9px; }
+  .bar{ height:8px; margin-top:12px; background:var(--g6); position:relative; }
+  .bar .fill{ position:absolute; left:0; top:0; bottom:0; width:88%;
+    background:linear-gradient(90deg,var(--safe) 0%, var(--caution) 52%, var(--danger) 100%); }
+  .bar .tick{ position:absolute; top:-4px; bottom:-4px; width:2px; background:var(--ink); left:85%; }
+  .meter .scale{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--g4); margin-top:8px;}
+
+  /* differentiators */
+  .diffs{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--line);}
+  .diffs .d{ padding:15px 14px; border-right:1px solid var(--line); }
+  .diffs .d:last-child{ border-right:0; }
+  .diffs .di{ font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--g4); }
+  .diffs .dh{ font-family:var(--serif); font-size:17px; font-weight:600; margin-top:8px; }
+  .diffs .dp{ font-size:11px; color:var(--g2); margin-top:7px; line-height:1.45; }
+
+  /* ---------- EVALUATE PAGE ---------- */
+  .twocol{ display:grid; grid-template-columns:1.15fr 1fr; gap:0 26px; }
+  .demo .di{ display:flex; gap:13px; padding:11px 0; border-top:1px solid var(--line); }
+  .demo .di:last-child{ border-bottom:1px solid var(--line); }
+  .demo .di .n{ font-family:var(--mono); font-size:10px; color:var(--g4); width:22px; flex:none; padding-top:2px; }
+  .demo .di .t{ font-size:12px; line-height:1.45; color:var(--g1); }
+  .demo .di .t b{ font-weight:600; }
+
+  .panel{ border:1px solid var(--line); padding:14px 16px; margin-bottom:14px; }
+  .panel .h{ font-family:var(--mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--g3); margin-bottom:10px;}
+  .kv{ display:flex; justify-content:space-between; gap:10px; padding:6px 0; border-bottom:1px dotted var(--g5); font-size:11px;}
+  .kv:last-child{ border-bottom:0; }
+  .kv .k{ color:var(--g3); }
+  .kv .v{ color:var(--ink); text-align:right; font-weight:500; }
+  .badge{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+  .badge .pip{ width:7px; height:7px; border-radius:50%; background:var(--safe); }
+
+  .stack{ font-size:11px; color:var(--g2); line-height:1.7; }
+  .stack b{ color:var(--ink); font-weight:600; font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; }
+  .roadmap .ri{ padding:8px 0; border-top:1px solid var(--line); font-size:11.5px; display:flex; gap:12px;}
+  .roadmap .ri:last-child{ border-bottom:1px solid var(--line); }
+  .roadmap .ri .ph{ font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--g4); width:24mm; flex:none; padding-top:2px;}
+  .roadmap .ri .rt{ color:var(--g1); line-height:1.4; }
+
+  .closing{ border-top:2px solid var(--ink); margin-top:14px; padding-top:14px; }
+  .closing .q{ font-family:var(--serif); font-style:italic; font-size:17px; line-height:1.35; color:var(--ink); max-width:150mm;}
+  .closing .by{ font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--g4); margin-top:10px;}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER ============ -->
+<section class="page cover">
+  <div class="runner">
+    <span><span class="dot"></span>Aegis — Judges' Packet</span>
+    <span>Beyond Tomorrow Summit 2026</span>
+  </div>
+
+  <div class="cover-hero">
+    <div class="kicker">AI Guardian · Cybersecurity × Fintech × Health</div>
+    <h1>AEGIS</h1>
+    <div class="sub">"Stop scams before they happen."</div>
+    <p class="lede">An AI guardian that detects manipulation in any conversation — voice, SMS, or chat — in real time, and intervenes <em>before</em> the money is lost. One engine, every channel and language.</p>
+
+    <div class="intersection">
+      <div><div class="t">Cybersecurity</div><div class="v">Social-engineering<br/>&amp; deepfake intent</div></div>
+      <div><div class="t">Fintech</div><div class="v">Real-time<br/>transaction shield</div></div>
+      <div><div class="t">Health</div><div class="v">Protecting the<br/>vulnerable</div></div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="cell"><div class="k">Submission</div><div class="val">Aegis — The AI Guardian That Stops Scams Before They Happen</div></div>
+    <div class="cell"><div class="k">Entrant</div><div class="val">Tumo Mogame — solo (full-stack, AI, design, pitch)</div></div>
+    <div class="cell"><div class="k">Live demo</div><div class="val">beyond-tomorrow-summit-ai-future-te.vercel.app</div></div>
+    <div class="cell"><div class="k">Repository</div><div class="val">github.com/TUMO-MOGAME/Beyond-Tomorrow-Summit-AI-Future-Tech-Ecosystem-</div></div>
+    <div class="cell"><div class="k">Status</div><div class="val">Working end-to-end prototype · 61/61 tests pass · deployed</div></div>
+    <div class="cell"><div class="k">Contact</div><div class="val">tumomogame9@gmail.com</div></div>
+  </div>
+
+  <div class="footer">
+    <span>Confidential — for judges &amp; organizers</span>
+    <span>01 / 04</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — PROBLEM ============ -->
+<section class="page">
+  <div class="runner">
+    <span><span class="dot"></span>The Problem</span>
+    <span>Why now</span>
+  </div>
+  <div style="height:14mm"></div>
+
+  <div class="secthead">
+    <div class="num">01 — THE PROBLEM</div>
+    <h2>AI made scams infinitely scalable. Our defenses didn't keep up.</h2>
+    <p class="dek">Generative AI made fraud faster, cheaper, and nearly impossible to detect — and the people who suffer most are those least equipped to fight back.</p>
+  </div>
+
+  <div class="stats">
+    <div class="s"><div class="big">$40B</div><div class="lab">Projected US AI-enabled fraud losses by 2027 (up from $12.3B in 2023 — 32% CAGR).</div><div class="src">Deloitte</div></div>
+    <div class="s"><div class="big">3 sec</div><div class="lab">Of audio is enough to clone a voice at 85% accuracy. 70% of people can't tell it's fake.</div><div class="src">AARP</div></div>
+    <div class="s"><div class="big">77%</div><div class="lab">Of voice-clone scam victims lose money; 25% of adults have been affected or know someone who has.</div><div class="src">McAfee</div></div>
+    <div class="s"><div class="big">5 min</div><div class="lab">Average interval between deepfake fraud attempts — and accelerating.</div><div class="src">Entrust</div></div>
+  </div>
+
+  <div class="secthead" style="margin-top:8px;">
+    <div class="num">WHY TODAY'S DEFENSES FAIL</div>
+  </div>
+  <div class="fail">
+    <div class="row"><div class="idx">01</div><div class="ft">Reactive</div><div class="fb">Banks and existing tools flag fraud <em>after</em> the transfer clears. By then the money — often irreversible — is already gone.</div></div>
+    <div class="row"><div class="idx">02</div><div class="ft">Keyword-based</div><div class="fb">Blocklist and keyword filters are trivially evaded — AI-generated scams rewrite themselves on every attempt and walk straight past them.</div></div>
+    <div class="row"><div class="idx">03</div><div class="ft">No human moment</div><div class="fb">There is no intervention while the victim is being manipulated. They are alone with the attacker at the one moment that matters.</div></div>
+  </div>
+
+  <p style="margin-top:18px; font-family:var(--serif); font-style:italic; font-size:15px; color:var(--g2);">Everything today is forensics. The problem demands prevention.</p>
+
+  <div class="footer">
+    <span>Aegis — Judges' Packet</span>
+    <span>02 / 04</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — SOLUTION ============ -->
+<section class="page">
+  <div class="runner">
+    <span><span class="dot"></span>The Solution</span>
+    <span>Scam DNA Engine</span>
+  </div>
+  <div style="height:14mm"></div>
+
+  <div class="secthead">
+    <div class="num">02 — HOW IT WORKS</div>
+    <h2>A real-time guardian that detects intent — and intervenes.</h2>
+    <p class="dek">The Scam DNA Engine analyzes any conversation and detects the underlying manipulation structure — urgency, authority impersonation, secrecy, fear, irreversible payment — not surface keywords. When risk crosses the threshold on a money scam, Aegis acts.</p>
+  </div>
+
+  <div class="meter">
+    <div class="top">
+      <div class="score">88<em>/100 risk</em></div>
+      <div class="verdict">● Danger — Intervene</div>
+    </div>
+    <div class="bar"><div class="fill"></div><div class="tick"></div></div>
+    <div class="scale"><span>0 · Safe</span><span>50 · Caution</span><span>≥75 · Fire intervention</span></div>
+  </div>
+
+  <div class="flow">
+    <div class="step"><div class="n">1</div><div class="body"><h3>Ingest</h3><p>Paste or simulate a live call, SMS, or chat. One pipeline, modality-agnostic.</p></div><div class="tag">Any channel</div></div>
+    <div class="step"><div class="n">2</div><div class="body"><h3>Scam DNA Engine</h3><p>An LLM returns structured JSON: risk score, the exact triggering quotes, the manipulation tactics, a plain-language summary, and a recommended action.</p></div><div class="tag">LLM · Zod</div></div>
+    <div class="step"><div class="n">3</div><div class="body"><h3>Warn + alert the Trusted Circle</h3><p>The user sees why it's dangerous in plain language; a pre-set family member is alerted — the most effective real-world circuit-breaker for elder fraud.</p></div><div class="tag">Human-in-loop</div></div>
+    <div class="step"><div class="n">4</div><div class="body"><h3>Freeze the payment — Transaction Shield</h3><p>The suspicious transfer is held before it completes, stopping the loss at the moment it matters.</p></div><div class="tag">Fintech</div></div>
+  </div>
+
+  <div class="secthead" style="margin:6px 0 12px;">
+    <div class="num">WHY AEGIS IS DIFFERENT — THE MOAT</div>
+  </div>
+  <div class="diffs">
+    <div class="d"><div class="di">01</div><div class="dh">Prevention, not forensics</div><div class="dp">Acts <em>during</em> the attack, before the payment leaves — not after the money is gone.</div></div>
+    <div class="d"><div class="di">02</div><div class="dh">Intent, not keywords</div><div class="dp">One engine generalizes across every channel and language. The Spanish demo proves it — no retraining.</div></div>
+    <div class="d"><div class="di">03</div><div class="dh">Trusted Circle + Care Mode</div><div class="dp">Loops in family. The senior does nothing — family sets it up once. A social safety net, not a lonely alert.</div></div>
+  </div>
+
+  <div class="footer">
+    <span>Aegis — Judges' Packet</span>
+    <span>03 / 04</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — EVALUATE ============ -->
+<section class="page">
+  <div class="runner">
+    <span><span class="dot"></span>Evaluate &amp; Build</span>
+    <span>30-second demo</span>
+  </div>
+  <div style="height:14mm"></div>
+
+  <div class="secthead">
+    <div class="num">03 — SEE IT IN 30 SECONDS</div>
+    <h2>Run the rescue.</h2>
+  </div>
+
+  <div class="twocol">
+    <div class="demo">
+      <div class="di"><div class="n">01</div><div class="t">Open the live demo and go to the <b>Guardian</b> dashboard.</div></div>
+      <div class="di"><div class="n">02</div><div class="t">Hit <b>Simulate call</b> on the grandparent fixture — the scam transcript streams in.</div></div>
+      <div class="di"><div class="n">03</div><div class="t">Watch the <b>risk meter climb</b> and the manipulation tactics light up with the exact words that triggered them.</div></div>
+      <div class="di"><div class="n">04</div><div class="t">At threshold, the <b>Trusted Circle alert</b> fires and the <b>Transaction Shield</b> freezes the transfer.</div></div>
+      <div class="di"><div class="n">05</div><div class="t">Run the <b>Spanish</b> fixture to prove intent-detection is language-agnostic; run the <b>safe</b> fixture to see a benign chat score low.</div></div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <div class="h">Build Status</div>
+        <div class="badge"><span class="pip"></span>61 / 61 automated checks pass</div>
+        <div class="kv" style="margin-top:10px;"><span class="k">Prototype</span><span class="v">End-to-end, live</span></div>
+        <div class="kv"><span class="k">Deploy</span><span class="v">Vercel (public URL)</span></div>
+        <div class="kv"><span class="k">Repo</span><span class="v">Public on GitHub</span></div>
+        <div class="kv"><span class="k">Fail-safe</span><span class="v">Mock engine — demo never hard-fails</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="h">Provider-agnostic engine</div>
+        <p style="font-size:11px; color:var(--g2); line-height:1.5;">Auto-detects an API key — Anthropic → Groq → Gemini → OpenRouter → OpenAI — and falls back to an offline heuristic <b style="font-family:var(--mono);font-size:9px;">MOCK</b> if none is present. Every integration degrades gracefully without a key.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:6px;">
+    <div class="h">Technology stack</div>
+    <div class="stack">
+      <b>AI / ML</b> &nbsp;Claude (Anthropic) LLM · structured tool-based JSON · prompt caching · Scam DNA system prompt &nbsp;·&nbsp; speech-to-text (Whisper / AssemblyAI)<br/>
+      <b>Frontend</b> &nbsp;Next.js 14 (App Router) · TypeScript · Tailwind · Framer Motion &nbsp;&nbsp; <b>Backend</b> &nbsp;Next.js API routes · Node.js · Zod validation-with-retry<br/>
+      <b>Integrations</b> &nbsp;Resend (email) · Twilio (SMS / Guardian Number call-screening) &nbsp;&nbsp; <b>Infra</b> &nbsp;Vercel · GitHub
+    </div>
+  </div>
+
+  <div class="secthead" style="margin:14px 0 8px;">
+    <div class="num">WHAT'S NEXT</div>
+  </div>
+  <div class="roadmap">
+    <div class="ri"><div class="ph">Near term</div><div class="rt">Dedicated synthetic-voice (deepfake-audio) forensic model as a second signal.</div></div>
+    <div class="ri"><div class="ph">Distribution</div><div class="rt">B2B2C with banks, telcos &amp; insurers; an SDK so any banking or messaging app can embed Aegis.</div></div>
+    <div class="ri"><div class="ph">Privacy</div><div class="rt">On-device / edge inference — conversations never leave the user's phone.</div></div>
+    <div class="ri"><div class="ph">Reach</div><div class="rt">Expanded multilingual coverage and eldercare / caregiver-dashboard integrations.</div></div>
+  </div>
+
+  <div class="closing">
+    <div class="q">"Scammers got an AI. It's time the rest of us got one too. We turn a $40-billion problem into a moment of safety."</div>
+    <div class="by">Tumo Mogame · Aegis · tumomogame9@gmail.com · github.com/TUMO-MOGAME</div>
+  </div>
+
+  <div class="footer">
+    <span>Aegis — Judges' Packet</span>
+    <span>04 / 04</span>
+  </div>
+</section>
+
+</body>
+</html>

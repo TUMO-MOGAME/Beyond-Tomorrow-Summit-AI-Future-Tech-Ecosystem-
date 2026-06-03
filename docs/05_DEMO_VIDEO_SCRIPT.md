@@ -55,7 +55,7 @@
 ### [2:05–2:30] — How it works (tech, fast)
 **Visual:** The architecture diagram (animate the flow).
 **VO:**
-> "Under the hood: a large language model powers the Scam DNA Engine with structured, explainable output. Speech-to-text turns calls into text, the engine scores the manipulation, and our intervention layer fires the family alert and the transaction hold. Built with Next.js, TypeScript, and Claude — deployed and live."
+> "Under the hood: a large language model powers the Scam DNA Engine with structured, explainable output — provider-agnostic, running live on a free model. For real calls, a Guardian Number screens only unknown callers, conferences in family, and holds the call. Built with Next.js and TypeScript — deployed and live."
 
 ---
 

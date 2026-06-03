@@ -5,9 +5,9 @@
 > Live site: https://beyond-tomorrow-summit-ai-future-te.vercel.app/guardian
 
 **Setup before recording:**
-- Add `ANTHROPIC_API_KEY` to Vercel first so the badge reads `anthropic · claude-sonnet-4-6` (see `07_DEPLOY_GUIDE.md`).
+- The live site already runs on a real engine — the badge reads `groq · llama-3.3-70b-versatile` (free). Confirm it doesn't say `mock`.
 - Open the live `/guardian` page, select **The Cloned-Voice Grandparent Scam**.
-- Browser zoom ~110%, close other tabs, hide bookmarks bar. Dark room reads premium.
+- Browser zoom ~110%, close other tabs, hide bookmarks bar. The pure-black UI reads premium.
 
 ---
 
@@ -61,14 +61,14 @@
 ## [2:00–2:25] HOW IT WORKS (tech, fast)
 **[DO]** Show the README architecture diagram OR the deck "how it works" slide.
 **VOICE:**
-> "Under the hood, a large language model powers the Scam DNA Engine with structured, explainable output. Speech-to-text turns calls into text, the engine scores the manipulation, and the intervention layer fires the family alert and the transaction hold. Built with Next.js and Claude — deployed and live."
+> "Under the hood, a large language model powers the Scam DNA Engine with structured, explainable output — and it runs on any provider, including free models. For real phone calls, Aegis works as a Guardian Number: only unknown callers are screened, family calls stay private, and on high risk it conferences a loved one in and holds the call. Built with Next.js, deployed and live — running right now on a free Llama model."
 
 ---
 
 ## [2:25–2:50] IMPACT + VISION + CLOSE
 **[DO]** Quick montage: dashboard → Care Mode section → end card (logo + tagline + URL).
 **VOICE:**
-> "AI fraud is a forty-billion-dollar problem, and it targets the people we love most. Aegis turns that moment of danger into a moment of safety — for over a billion vulnerable people. Next, we're embedding it into banks, phone carriers, and eldercare. Scammers got an AI. It's time the rest of us got one too."
+> "AI fraud is a forty-billion-dollar problem, and it targets the people we love most. Aegis turns that moment of danger into a moment of safety — for over a billion vulnerable people. Next, we're taking the Guardian Number to production and embedding Aegis into banks, phone carriers, and eldercare. Scammers got an AI. It's time the people we love got one too."
 
 **[END CARD]** `AEGIS — Stop scams before they happen.`
 `beyond-tomorrow-summit-ai-future-te.vercel.app` · GitHub · Beyond Tomorrow Summit 2026

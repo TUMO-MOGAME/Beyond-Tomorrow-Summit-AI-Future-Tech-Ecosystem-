@@ -10,16 +10,20 @@ from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 
-# ── Aegis brand palette ────────────────────────────────────────────────
-BG = RGBColor(0x0A, 0x0E, 0x1A)        # deep navy
-PANEL = RGBColor(0x11, 0x17, 0x26)
-WHITE = RGBColor(0xE5, 0xE9, 0xF0)
-MUTED = RGBColor(0x94, 0xA3, 0xB8)
-BLUE = RGBColor(0x3B, 0x82, 0xF6)
-BLUE_LT = RGBColor(0x60, 0xA5, 0xFA)
-GREEN = RGBColor(0x22, 0xC5, 0x5E)
-AMBER = RGBColor(0xF5, 0x9E, 0x0B)
-RED = RGBColor(0xEF, 0x44, 0x44)
+# ── Aegis brand palette — "Pure mono" (matches the app) ─────────────────
+# True black + white + grayscale; the ONLY color is the functional risk
+# signal (safe/caution/danger). The "accent" names below are kept but resolve
+# to white/gray so the whole deck reads monochrome with risk-color punctuation.
+BG = RGBColor(0x00, 0x00, 0x00)        # true black
+PANEL = RGBColor(0x0F, 0x0F, 0x11)
+WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+MUTED = RGBColor(0xA4, 0xA4, 0xAC)
+BLUE = RGBColor(0xE0, 0xE0, 0xE5)      # (accent → near-white)
+BLUE_LT = RGBColor(0xFF, 0xFF, 0xFF)   # (accent → white)
+GREEN = RGBColor(0x7F, 0xD6, 0xA6)     # safe (sage)
+AMBER = RGBColor(0xE0, 0xB4, 0x48)     # caution
+RED = RGBColor(0xF0, 0x61, 0x3F)       # danger (clay)
+DISPLAY = "Georgia"                     # editorial serif (echoes Fraunces)
 
 W, H = Inches(13.333), Inches(7.5)  # 16:9
 
@@ -91,10 +95,10 @@ def panel(s, x, y, w, h, fill=PANEL):
 s = slide()
 chip(s, Inches(4.67), Inches(1.3), Inches(4.0), Inches(0.5),
      "BEYOND TOMORROW SUMMIT 2026", PANEL, BLUE_LT, 12)
-txt(s, Inches(1), Inches(2.1), Inches(11.33), Inches(1.4), "🛡️ AEGIS",
-    72, WHITE, True, PP_ALIGN.CENTER)
+txt(s, Inches(1), Inches(2.1), Inches(11.33), Inches(1.4), "AEGIS",
+    72, WHITE, True, PP_ALIGN.CENTER, font=DISPLAY)
 txt(s, Inches(1), Inches(3.5), Inches(11.33), Inches(0.8),
-    "Stop scams before they happen.", 30, BLUE_LT, True, PP_ALIGN.CENTER)
+    "Stop scams before they happen.", 30, WHITE, True, PP_ALIGN.CENTER, font=DISPLAY)
 txt(s, Inches(2), Inches(4.5), Inches(9.33), Inches(1.0),
     "An AI guardian that detects manipulation in any conversation — voice, SMS, or chat — "
     "and intervenes in real time to protect vulnerable people and their money.",
@@ -139,9 +143,9 @@ txt(s, Inches(0.9), Inches(5.6), Inches(11.5), Inches(0.8),
 s = slide()
 txt(s, Inches(0.9), Inches(0.7), Inches(11.5), Inches(0.7), "Why today’s defenses fail", 30, WHITE, True)
 fails = [
-    ("⏰  Reactive", "Banks catch fraud AFTER the money is gone. The loss already happened."),
-    ("🔑  Keyword-based", "AI scams rewrite themselves endlessly and walk right past filters."),
-    ("🕳️  No human moment", "The victim is alone with the attacker. Nobody steps in."),
+    ("Reactive", "Banks catch fraud AFTER the money is gone. The loss already happened."),
+    ("Keyword-based", "AI scams rewrite themselves endlessly and walk right past filters."),
+    ("No human moment", "The victim is alone with the attacker. Nobody steps in."),
 ]
 y = Inches(2.0)
 for title, body in fails:
@@ -152,15 +156,15 @@ for title, body in fails:
 
 # ── Slide 5 — Meet Aegis ───────────────────────────────────────────────
 s = slide()
-txt(s, Inches(0.9), Inches(1.0), Inches(11.5), Inches(1.0), "Meet Aegis", 44, WHITE, True, PP_ALIGN.CENTER)
+txt(s, Inches(0.9), Inches(1.0), Inches(11.5), Inches(1.0), "Meet Aegis", 44, WHITE, True, PP_ALIGN.CENTER, font=DISPLAY)
 txt(s, Inches(1.5), Inches(2.2), Inches(10.3), Inches(1.0),
     "An AI guardian that detects manipulation in real time — and intervenes before money is lost.",
-    22, BLUE_LT, True, PP_ALIGN.CENTER, line_spacing=1.2)
-pillars = [("🧠", "DETECT", GREEN), ("📢", "WARN", AMBER), ("🛡️", "PROTECT", BLUE)]
+    22, WHITE, True, PP_ALIGN.CENTER, line_spacing=1.2)
+pillars = [("01", "DETECT", GREEN), ("02", "WARN", AMBER), ("03", "PROTECT", WHITE)]
 x = Inches(1.9); cw = Inches(3.0); gap = Inches(0.85)
 for icon, label, col in pillars:
     panel(s, x, Inches(4.0), cw, Inches(2.2))
-    txt(s, x, Inches(4.35), cw, Inches(0.9), icon, 40, WHITE, True, PP_ALIGN.CENTER)
+    txt(s, x, Inches(4.35), cw, Inches(0.9), icon, 34, MUTED, True, PP_ALIGN.CENTER, font="Consolas")
     txt(s, x, Inches(5.35), cw, Inches(0.6), label, 22, col, True, PP_ALIGN.CENTER)
     x = Emu(int(x) + int(cw) + int(gap))
 
@@ -179,8 +183,10 @@ for i, st in enumerate(steps):
 panel(s, Inches(0.9), Inches(4.8), Inches(11.5), Inches(1.6))
 txt(s, Inches(1.3), Inches(5.05), Inches(10.7), Inches(1.2),
     "We detect the manipulation STRUCTURE — urgency, impersonation, secrecy, irreversible "
-    "payment — not keywords.\nSo it works on any call, text, or chat, in any language.",
-    18, WHITE, False, PP_ALIGN.LEFT, MSO_ANCHOR.MIDDLE, line_spacing=1.25)
+    "payment — not keywords. Works on any call, text, or chat, in any language, on any LLM.\n"
+    "For real calls: a “Guardian Number” screens only UNKNOWN callers (family calls stay private), "
+    "and can conference a loved one in and hold the call.",
+    16, WHITE, False, PP_ALIGN.LEFT, MSO_ANCHOR.MIDDLE, line_spacing=1.2)
 
 # ── Slide 7 — LIVE DEMO ────────────────────────────────────────────────
 s = slide()
@@ -232,14 +238,16 @@ txt(s, Inches(0.9), Inches(1.1), Inches(11.5), Inches(1.6),
     "Tomorrow: an AI guardian in every bank and phone — for everyone who’s ever been a target.",
     24, WHITE, True, PP_ALIGN.CENTER, line_spacing=1.3)
 txt(s, Inches(0.9), Inches(3.5), Inches(11.5), Inches(0.6),
-    "Roadmap:  deepfake-audio model  →  bank SDK  →  on-device privacy  →  global languages",
+    "Roadmap:  Guardian Number to production  →  real payment hold  →  on-device privacy  →  bank/telco SDK",
     15, MUTED, False, PP_ALIGN.CENTER)
 panel(s, Inches(2.4), Inches(4.5), Inches(8.5), Inches(1.5))
 txt(s, Inches(2.4), Inches(4.75), Inches(8.5), Inches(1.0),
-    "“Scammers got an AI. It’s time the rest of us got one too.”",
-    22, BLUE_LT, True, PP_ALIGN.CENTER, MSO_ANCHOR.MIDDLE)
+    "“Scammers got an AI. It’s time the people we love got one too.”",
+    22, WHITE, True, PP_ALIGN.CENTER, MSO_ANCHOR.MIDDLE, font=DISPLAY)
 txt(s, Inches(0.9), Inches(6.4), Inches(11.5), Inches(0.5),
     "AEGIS  ·  Beyond Tomorrow Summit 2026  ·  github.com/TUMO-MOGAME", 13, MUTED, False, PP_ALIGN.CENTER)
 
-prs.save("Aegis_Pitch_Deck.pptx")
-print(f"Saved Aegis_Pitch_Deck.pptx — {len(prs.slides.__iter__.__self__._sldIdLst)} slides")
+import os
+_out = os.path.join(os.path.dirname(__file__), "..", "docs", "Aegis_Pitch_Deck.pptx")
+prs.save(_out)
+print(f"Saved {os.path.normpath(_out)} — {len(prs.slides.__iter__.__self__._sldIdLst)} slides")

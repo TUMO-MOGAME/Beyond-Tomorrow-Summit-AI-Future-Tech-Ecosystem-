@@ -44,15 +44,19 @@
 - [x] Fixed real bug: bank-impersonation scam was scoring safe → now danger
 - [x] CLAUDE.md + .claude/ project memory setup
 
-### ⬜ Remaining (mostly user-side)
-- [ ] **Add `ANTHROPIC_API_KEY` to Vercel** → flips live site from mock to real Claude (60 sec; see 07_DEPLOY_GUIDE)
-- [ ] Run `npm test` against the real engine (with key in `.env.local`)
-- [ ] (Optional) More scam fixtures: sextortion, crypto, tech-support, job-offer
-- [ ] (Optional) Accessibility/large-text pass (ties to elderly UX)
-- [ ] Capture 7 screenshots (see 09_SUBMISSION_CHECKLIST)
-- [ ] Record demo video (script: 08_VIDEO_TELEPROMPTER)
-- [ ] Submit on Devpost (copy from 03_SUBMISSION_PACKAGE; verify with 09_SUBMISSION_CHECKLIST)
-- [ ] Rehearse Round 2 pitch 5× (10_ROUND2_PITCH)
+### ✅ Done (2026-06-03)
+- [x] **Live site is REAL** — Groq key on Vercel; badge `groq · llama-3.3-70b-versatile`. 61/61 tests pass against live.
+- [x] Submission text (docs/03) updated for new design + Guardian Number + free models.
+- [x] Demo video scripts (05, 08) updated to the mono UI + Guardian Number.
+- [x] Pitch deck regenerated in pure-mono (`docs/Aegis_Pitch_Deck.pptx`).
+- [x] 7 submission screenshots captured from live (`docs/screenshots/`).
+
+### ⬜ Remaining (USER must do — needs you, not code)
+- [ ] **Record the ≤3-min demo video** (teleprompter: docs/08) → upload YouTube unlisted.
+- [ ] **Submit on Devpost** — paste from docs/03; verify with docs/09; attach screenshots + deck + video link.
+- [ ] **Rehearse Round 2 pitch** 5× (docs/10).
+- [ ] (Optional) Set `RESEND_API_KEY`+`ALERT_CONTACTS` (real emails) and a Twilio trial (live voice flow).
+- [ ] (Optional) Accessibility/large-text pass for elderly UX.
 
 ### ▶️ Next step
 Add the API key to Vercel, then re-run tests against real Claude — OR add more scam
