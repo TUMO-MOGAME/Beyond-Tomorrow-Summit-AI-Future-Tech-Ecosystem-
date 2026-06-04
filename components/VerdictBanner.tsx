@@ -1,35 +1,18 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Icon, { type IconName } from "./Icon";
+import { ShieldCheck, AlertTriangle, ShieldAlert, ArrowRight, Mic } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type Verdict = "safe" | "caution" | "danger";
 
 const STYLES: Record<
   Verdict,
-  { ring: string; text: string; label: string; icon: IconName; chip: string }
+  { ring: string; text: string; chip: string; label: string; icon: LucideIcon }
 > = {
-  safe: {
-    ring: "border-sage/30 bg-sage/[0.07]",
-    text: "text-sage",
-    label: "SAFE",
-    icon: "shield-check",
-    chip: "bg-sage/10 text-sage",
-  },
-  caution: {
-    ring: "border-caution/35 bg-caution/[0.07]",
-    text: "text-caution",
-    label: "CAUTION",
-    icon: "alert",
-    chip: "bg-caution/10 text-caution",
-  },
-  danger: {
-    ring: "border-clay/40 bg-clay/[0.08]",
-    text: "text-clay",
-    label: "DANGER",
-    icon: "shield",
-    chip: "bg-clay/10 text-clay",
-  },
+  safe: { ring: "border-safe/25 bg-safe/[0.07]", text: "text-safe", chip: "bg-safe/12 text-safe", label: "SAFE", icon: ShieldCheck },
+  caution: { ring: "border-caution/30 bg-caution/[0.08]", text: "text-caution", chip: "bg-caution/12 text-caution", label: "CAUTION", icon: AlertTriangle },
+  danger: { ring: "border-danger/30 bg-danger/[0.08]", text: "text-danger", chip: "bg-danger/12 text-danger", label: "DANGER", icon: ShieldAlert },
 };
 
 export default function VerdictBanner({
@@ -44,6 +27,7 @@ export default function VerdictBanner({
   voiceSignal?: string;
 }) {
   const s = STYLES[verdict];
+  const Ico = s.icon;
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -52,24 +36,22 @@ export default function VerdictBanner({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 8 }}
         transition={{ duration: 0.3 }}
-        className={`rounded-2xl border p-4 ${s.ring}`}
+        className={`rounded-3xl border p-4 ${s.ring}`}
       >
         <div className="flex items-center gap-2.5">
-          <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${s.chip}`}>
-            <Icon name={s.icon} size={18} />
+          <span className={`flex h-8 w-8 items-center justify-center rounded-xl ${s.chip}`}>
+            <Ico size={18} />
           </span>
-          <span className={`font-mono text-sm font-semibold tracking-[0.2em] ${s.text}`}>
-            {s.label}
-          </span>
+          <span className={`text-sm font-bold tracking-[0.18em] ${s.text}`}>{s.label}</span>
         </div>
-        <p className="mt-3 text-[15px] leading-relaxed text-cream">{summary}</p>
-        <div className="mt-3 flex items-start gap-2 rounded-xl border border-gold/20 bg-gold/[0.06] p-3 text-sm text-gold-soft">
-          <Icon name="pointer" size={16} className="mt-0.5 shrink-0" />
+        <p className="mt-3 text-[15px] leading-relaxed text-ink">{summary}</p>
+        <div className="mt-3 flex items-start gap-2 rounded-2xl border border-brand/15 bg-brand/[0.06] p-3 text-sm text-brand-deep">
+          <ArrowRight size={16} className="mt-0.5 shrink-0" />
           <span>{recommendedAction}</span>
         </div>
         {voiceSignal && voiceSignal !== "N/A" && (
           <div className="mt-2.5 flex items-start gap-2 text-xs text-caution">
-            <Icon name="mic" size={14} className="mt-0.5 shrink-0" />
+            <Mic size={14} className="mt-0.5 shrink-0" />
             <span>{voiceSignal}</span>
           </div>
         )}

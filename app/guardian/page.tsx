@@ -10,7 +10,7 @@ import TranscriptFeed, { type FeedLine } from "@/components/TranscriptFeed";
 import TransactionShield, { type ShieldState } from "@/components/TransactionShield";
 import TrustedCircle, { type AlertState } from "@/components/TrustedCircle";
 import AegisLogo from "@/components/AegisLogo";
-import Icon from "@/components/Icon";
+import { Radio, ClipboardList, Play, Square, ArrowRight, Check, PhoneCall } from "lucide-react";
 
 interface AnalyzeResult {
   provider: string;
@@ -187,40 +187,40 @@ export default function Guardian() {
         <Link href="/" className="transition hover:opacity-80">
           <AegisLogo size={26} />
         </Link>
-        <div className="flex gap-1 rounded-full border border-ink-line bg-ink-panel p-1">
+        <div className="flex gap-1 rounded-full border border-line bg-white p-1 shadow-soft">
           <button
             onClick={() => setMode("simulate")}
-            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition ${
-              mode === "simulate" ? "bg-gold text-ink" : "text-sand hover:text-cream"
+            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+              mode === "simulate" ? "bg-brand text-white shadow-glow" : "text-muted hover:text-ink"
             }`}
           >
-            <Icon name="broadcast" size={14} /> Simulate live call
+            <Radio size={14} /> Simulate live call
           </button>
           <button
             onClick={() => setMode("paste")}
-            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition ${
-              mode === "paste" ? "bg-gold text-ink" : "text-sand hover:text-cream"
+            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+              mode === "paste" ? "bg-brand text-white shadow-glow" : "text-muted hover:text-ink"
             }`}
           >
-            <Icon name="clipboard" size={14} /> Paste your own
+            <ClipboardList size={14} /> Paste your own
           </button>
         </div>
       </div>
 
       <div className="eyebrow mb-2">The Guardian · real-time analysis</div>
-      <h1 className="font-display text-3xl font-light tracking-tight text-cream sm:text-4xl">
+      <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
         Watch a scam get caught, live.
       </h1>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-sand">
-        Aegis analyzes the conversation line-by-line and intervenes the moment risk crosses into
+      <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slatey">
+        Aegis reads the conversation line-by-line and steps in the moment risk crosses into
         danger — before the money is gone.
       </p>
       <Link
         href="/call"
-        className="mt-3 inline-flex items-center gap-1.5 text-sm text-gold-soft transition hover:text-cream"
+        className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand transition hover:text-brand-deep"
       >
-        <Icon name="broadcast" size={15} /> See the real phone-call flow (Guardian Number)
-        <Icon name="arrow-right" size={15} />
+        <PhoneCall size={15} /> See the real phone-call flow (Guardian Number)
+        <ArrowRight size={15} />
       </Link>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
@@ -241,10 +241,10 @@ export default function Guardian() {
                       resetIntervention(f.id);
                     }}
                     disabled={playing}
-                    className={`rounded-full border px-3.5 py-1.5 text-xs transition disabled:opacity-50 ${
+                    className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition disabled:opacity-50 ${
                       activeFixture.id === f.id
-                        ? "border-gold/50 bg-gold/15 text-gold-soft"
-                        : "border-ink-line bg-ink-panel text-sand hover:border-gold/40 hover:text-cream"
+                        ? "border-brand bg-brand/10 text-brand-deep"
+                        : "border-line bg-white text-muted hover:border-brand/40 hover:text-ink"
                     }`}
                   >
                     {f.title}
@@ -256,16 +256,16 @@ export default function Guardian() {
                 {!playing ? (
                   <button
                     onClick={simulate}
-                    className="flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-semibold text-ink shadow-gold transition hover:bg-gold-soft"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white shadow-glow transition hover:bg-brand-deep"
                   >
-                    <Icon name="play" size={16} /> Simulate live call
+                    <Play size={16} /> Simulate live call
                   </button>
                 ) : (
                   <button
                     onClick={stop}
-                    className="flex flex-1 items-center justify-center gap-2 rounded-full border border-clay/50 bg-clay/15 px-6 py-3 font-semibold text-clay transition hover:bg-clay/25"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-full border border-danger/40 bg-danger/10 px-6 py-3 font-semibold text-danger transition hover:bg-danger/15"
                   >
-                    <Icon name="stop" size={14} /> Stop
+                    <Square size={14} /> Stop
                   </button>
                 )}
               </div>
@@ -277,7 +277,7 @@ export default function Guardian() {
                   <button
                     key={f.id}
                     onClick={() => setPasteText(fixtureToText(f))}
-                    className="rounded-full border border-ink-line bg-ink-panel px-3.5 py-1.5 text-xs text-sand transition hover:border-gold/40 hover:text-cream"
+                    className="rounded-full border border-line bg-white px-3.5 py-1.5 text-xs font-medium text-muted transition hover:border-brand/40 hover:text-ink"
                   >
                     {f.title}
                   </button>
@@ -287,12 +287,12 @@ export default function Guardian() {
                 value={pasteText}
                 onChange={(e) => setPasteText(e.target.value)}
                 placeholder="Paste a phone call transcript, SMS, or chat here…"
-                className="focus-gold scroll-soft h-72 w-full resize-none rounded-2xl border border-ink-line bg-ink-panel p-4 text-sm leading-relaxed text-cream placeholder:text-taupe"
+                className="focus-brand scroll-soft h-72 w-full resize-none rounded-2xl border border-line bg-white p-4 text-sm leading-relaxed text-ink placeholder:text-faint"
               />
               <button
                 onClick={analyzePaste}
                 disabled={analyzing || pasteText.trim().length < 4}
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-semibold text-ink shadow-gold transition hover:bg-gold-soft disabled:opacity-40 disabled:shadow-none"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white shadow-glow transition hover:bg-brand-deep disabled:opacity-40 disabled:shadow-none"
               >
                 {analyzing ? "Analyzing…" : "Analyze with Aegis"}
               </button>
@@ -302,14 +302,14 @@ export default function Guardian() {
 
         {/* RIGHT: live analysis */}
         <div className="space-y-4">
-          <div className="rounded-2xl border border-ink-line bg-ink-panel p-5 shadow-panel">
+          <div className="rounded-3xl border border-line bg-white p-5 shadow-soft">
             <RiskMeter score={score} />
             {result && (
-              <div className="mt-2 flex items-center justify-center gap-2 font-mono text-[11px] text-taupe">
+              <div className="mt-2 flex items-center justify-center gap-2 text-[11px] text-faint">
                 analyzed via {result.provider} · {result.model}
                 {analyzing && (
-                  <span className="flex items-center gap-1 text-gold">
-                    <span className="h-1.5 w-1.5 animate-breathe rounded-full bg-gold" /> live
+                  <span className="flex items-center gap-1 text-brand">
+                    <span className="h-1.5 w-1.5 animate-breathe rounded-full bg-brand" /> live
                   </span>
                 )}
               </div>
@@ -317,7 +317,7 @@ export default function Guardian() {
           </div>
 
           {error && (
-            <div className="rounded-2xl border border-clay/45 bg-clay/10 p-4 text-sm text-clay">
+            <div className="rounded-2xl border border-danger/40 bg-danger/10 p-4 text-sm text-danger">
               {error}
             </div>
           )}
@@ -351,8 +351,8 @@ export default function Guardian() {
                 Manipulation tactics detected ({result.tactics.length})
               </div>
               {result.tactics.length === 0 ? (
-                <div className="flex items-center gap-2 rounded-xl border border-sage/30 bg-sage/[0.06] p-3 text-sm text-sage">
-                  <Icon name="check" size={16} /> No manipulation tactics detected.
+                <div className="flex items-center gap-2 rounded-2xl border border-safe/30 bg-safe/[0.07] p-3 text-sm text-safe">
+                  <Check size={16} /> No manipulation tactics detected.
                 </div>
               ) : (
                 result.tactics.map((t, i) => <TacticCard key={`${t.name}-${i}`} tactic={t} index={i} />)
@@ -361,7 +361,7 @@ export default function Guardian() {
           )}
 
           {!result && !error && (
-            <div className="flex h-32 items-center justify-center rounded-2xl border border-dashed border-ink-line text-sm text-taupe">
+            <div className="flex h-32 items-center justify-center rounded-2xl border border-dashed border-line text-sm text-faint">
               Analysis will appear here as the conversation unfolds
             </div>
           )}

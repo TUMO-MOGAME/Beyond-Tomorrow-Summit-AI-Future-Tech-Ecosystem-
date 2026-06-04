@@ -5,6 +5,21 @@
 
 ---
 
+## 📍 Session 2026-06-04 — "Soft Guardian" frontend redesign
+
+- Full frontend redesign in a new aesthetic (from a user-loved reference): **Outfit** +
+  **Gamja Flower** (handwritten accent = Aegis's warm voice), soft blue-pastel palette, white
+  cards + soft shadows, **lucide-react** icons, springy Framer Motion, phone-frame hero.
+- New design system in `tailwind.config.ts` + `app/globals.css` ("Soft Guardian"). Old mono
+  tokens removed. Custom `Icon.tsx` deleted (replaced by lucide).
+- Rebuilt all 4 pages (landing, /guardian, /care, /call) + all components (AegisLogo, RiskMeter,
+  TacticCard, VerdictBanner, TranscriptFeed, TransactionShield, TrustedCircle). Logic unchanged.
+- Verified: build clean, 61/61 tests pass, screenshots in `docs/redesign/`.
+- ⚠️ NOTE: the submission screenshots (`docs/screenshots/`) and the pitch deck are now from the
+  OLD mono design → re-capture/regenerate them against this new look before submitting.
+
+---
+
 ## 📍 Session 2026-05-31 (pm) — redesign + free models + Guardian Number pivot
 
 - **UI redesign:** "Pure mono" theme (true black/white, fonts Fraunces+Hanken+JetBrains Mono),

@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 type Verdict = "safe" | "caution" | "danger";
 
 function colorFor(score: number): string {
-  if (score >= 75) return "#F0613F"; // clay — danger
-  if (score >= 40) return "#E0B448"; // amber — caution
-  return "#7FD6A6"; // sage — safe
+  if (score >= 75) return "#E5564B"; // danger
+  if (score >= 40) return "#E0A23C"; // caution
+  return "#1FA97A"; // safe
 }
 
 function labelFor(score: number): Verdict {
@@ -18,13 +18,12 @@ function labelFor(score: number): Verdict {
 }
 
 /**
- * Animated semicircular risk gauge. The needle + arc + number all animate
- * smoothly to the target score — the "climbing meter" moment. Tuned to the
- * calm palette so a high score reads as decisive, not as a blaring alarm.
+ * Animated semicircular risk gauge — soft light theme. The arc, needle and
+ * number animate up to the score; color shifts safe → caution → danger.
  */
 export default function RiskMeter({ score }: { score: number }) {
   const radius = 120;
-  const circumference = Math.PI * radius; // half circle
+  const circumference = Math.PI * radius;
   const progress = useMotionValue(0);
   const [display, setDisplay] = useState(0);
 
@@ -47,31 +46,21 @@ export default function RiskMeter({ score }: { score: number }) {
     <div className="flex flex-col items-center">
       <div className="relative" style={{ width: 280, height: 160 }}>
         <svg width="280" height="160" viewBox="0 0 280 160">
-          <defs>
-            <filter id="meterGlow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="3.5" result="b" />
-              <feMerge>
-                <feMergeNode in="b" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
           {/* track */}
           <path
             d="M 20 150 A 120 120 0 0 1 260 150"
             fill="none"
-            stroke="#1C1C1F"
+            stroke="#E3EAF6"
             strokeWidth="16"
             strokeLinecap="round"
           />
-          {/* animated value arc */}
+          {/* value arc */}
           <motion.path
             d="M 20 150 A 120 120 0 0 1 260 150"
             fill="none"
             stroke={color}
             strokeWidth="16"
             strokeLinecap="round"
-            filter="url(#meterGlow)"
             strokeDasharray={circumference}
             style={{ strokeDashoffset: useTransform(dash, (d) => circumference - d) }}
           />
@@ -88,18 +77,14 @@ export default function RiskMeter({ score }: { score: number }) {
             animate={{ rotate: angle }}
             transition={{ duration: 1.1, ease: "easeOut" }}
           />
-          <circle cx="140" cy="150" r="7" fill="#000000" stroke={color} strokeWidth="2.5" />
+          <circle cx="140" cy="150" r="7" fill="#FFFFFF" stroke={color} strokeWidth="3" />
         </svg>
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center">
-          <motion.span
-            key={verdict}
-            className="font-mono text-5xl font-bold tabular-nums"
-            style={{ color }}
-          >
+          <span className="text-5xl font-semibold tabular-nums" style={{ color }}>
             {display}
-          </motion.span>
+          </span>
           <span
-            className="mt-0.5 font-mono text-[11px] font-medium uppercase tracking-[0.25em]"
+            className="mt-0.5 text-[11px] font-bold uppercase tracking-[0.2em]"
             style={{ color }}
           >
             {verdict}
