@@ -38,28 +38,26 @@ export default function CareMode() {
             You set this up once — for someone you love
           </span>
         </div>
-        <h1 className="text-4xl font-semibold tracking-tight text-ink">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
           Protect someone you love, in three steps
         </h1>
-        <p className="mx-auto mt-3 max-w-xl leading-relaxed text-slatey">
+        <p className="mx-auto mt-2 max-w-xl text-[14px] leading-relaxed text-slatey">
           You set it all up from <em className="not-italic font-medium text-ink">your</em> phone, in a few
           minutes. {senior || "Your relative"} does nothing — no app to open, no buttons to press.
-          Aegis just watches over them, so they can keep living the way they always have.
         </p>
       </div>
 
-      {/* warm header banner */}
-      <div className="relative mt-8 overflow-hidden rounded-4xl border border-line shadow-card">
+      {/* warm header banner — bright photo, frosted caption */}
+      <div className="relative mt-6 overflow-hidden rounded-3xl border border-line shadow-card">
         <Photo
           src="/images/couple-connected.webp"
           alt="An older couple sitting together on their sofa, smiling and waving on a video call"
           sizes="(max-width: 768px) 100vw, 768px"
           priority
-          className="aspect-[16/7]"
-          overlay="none"
+          quality={92}
+          className="aspect-[16/6]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
-        <p className="absolute bottom-4 left-5 right-5 font-hand text-xl text-white sm:text-2xl">
+        <p className="absolute bottom-3 left-3 right-3 rounded-2xl bg-white/85 px-4 py-2 font-hand text-base text-brand-deep shadow-soft backdrop-blur sm:text-lg">
           They stay free to call, chat, and connect. Aegis only steps in when something&apos;s wrong.
         </p>
       </div>
@@ -84,7 +82,7 @@ export default function CareMode() {
         key={step}
         initial={{ opacity: 0, x: 12 }}
         animate={{ opacity: 1, x: 0 }}
-        className="mt-8 rounded-4xl border border-line bg-white p-7 shadow-card"
+        className="mt-6 rounded-3xl border border-line bg-white p-6 shadow-card"
       >
         {step === 1 && (
           <div className="space-y-5">
@@ -196,7 +194,7 @@ export default function CareMode() {
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mt-6 rounded-4xl border border-safe/30 bg-safe/[0.07] p-8 text-center"
+          className="mt-6 rounded-3xl border border-safe/30 bg-safe/[0.07] p-6 text-center"
         >
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-safe/15 text-safe">
             <ShieldCheck size={30} />

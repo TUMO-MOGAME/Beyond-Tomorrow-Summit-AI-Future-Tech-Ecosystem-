@@ -64,9 +64,9 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Nav */}
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Logo />
-        <div className="hidden items-center gap-7 text-sm font-medium text-slatey sm:flex">
+        <div className="hidden items-center gap-6 text-sm font-medium text-slatey sm:flex">
           <a href="#how" className="transition hover:text-ink">How it works</a>
           <Link href="/care" className="transition hover:text-ink">Care Mode</Link>
           <a
@@ -75,57 +75,57 @@ export default function Home() {
             rel="noreferrer"
             className="flex items-center gap-1.5 transition hover:text-ink"
           >
-            <GithubMark size={16} /> GitHub
+            <GithubMark size={15} /> GitHub
           </a>
         </div>
         <Link
           href="/guardian"
-          className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-deep"
+          className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-deep"
         >
           Try it
         </Link>
       </nav>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-10 pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:pt-16">
+      <section className="mx-auto grid max-w-5xl items-center gap-8 px-6 pt-6 pb-10 lg:grid-cols-[1.05fr_0.95fr] lg:pt-10">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={spring}>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-4 py-1.5 shadow-soft">
-            <span className="relative flex h-2 w-2">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-3 py-1 shadow-soft">
+            <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
             </span>
-            <span className="text-xs font-semibold tracking-wide text-slatey">Beyond Tomorrow Summit 2026</span>
+            <span className="text-[11px] font-semibold tracking-wide text-slatey">Beyond Tomorrow Summit 2026</span>
           </div>
 
-          <h1 className="text-5xl font-semibold leading-[1.04] tracking-tight text-ink sm:text-6xl">
+          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
             A gentle guardian
             <br /> for the people
             <br /> <span className="text-brand">you love.</span>
           </h1>
 
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-slatey">
+          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-slatey">
             Someone is about to talk your mother into wiring money she&apos;ll never see again. Aegis
             hears the scam as it happens — and steps in <em className="font-medium not-italic text-ink">during</em> the
-            call, before a single dollar leaves the account.
+            call, before a dollar leaves the account.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-2.5">
             <Link
               href="/guardian"
-              className="group inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base font-semibold text-white shadow-glow transition hover:bg-brand-deep"
+              className="group inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-deep"
             >
               See it in action
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
               href="/care"
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3.5 text-base font-semibold text-ink shadow-soft transition hover:bg-mist"
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-5 py-3 text-sm font-semibold text-ink shadow-soft transition hover:bg-mist"
             >
               Protect someone
             </Link>
           </div>
 
-          <p className="mt-6 font-hand text-xl text-brand-deep/80">
+          <p className="mt-5 font-hand text-lg text-brand-deep/80">
             it watches over them, so you don&apos;t have to worry.
           </p>
         </motion.div>
@@ -137,7 +137,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ ...spring, delay: 0.8 }}
-            className="absolute -left-2 top-10 hidden font-hand text-xl text-brand-deep sm:block lg:left-2"
+            className="absolute -left-2 top-8 hidden font-hand text-lg text-brand-deep sm:block lg:left-0"
           >
             Aegis stepped in →
           </motion.div>
@@ -145,26 +145,26 @@ export default function Home() {
       </section>
 
       {/* Stats */}
-      <section className="mx-auto max-w-6xl px-6 pb-16">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <section className="mx-auto max-w-5xl px-6 pb-12">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {STATS.map((s) => (
-            <div key={s.label} className="rounded-3xl border border-line bg-white/70 p-5 shadow-soft">
-              <div className="text-3xl font-semibold text-ink">{s.value}</div>
-              <div className="mt-1.5 text-sm leading-snug text-muted">{s.label}</div>
+            <div key={s.label} className="rounded-2xl border border-line bg-white/70 p-4 shadow-soft">
+              <div className="text-2xl font-semibold text-ink">{s.value}</div>
+              <div className="mt-1 text-xs leading-snug text-muted">{s.label}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* How it works */}
-      <section id="how" className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="mb-9 max-w-2xl">
-          <div className="eyebrow mb-2">How Aegis protects them</div>
-          <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+      <section id="how" className="mx-auto max-w-5xl px-6 pb-14">
+        <div className="mb-6 max-w-2xl">
+          <div className="eyebrow mb-1.5">How Aegis protects them</div>
+          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
             One guardian. Every call, text, and chat.
           </h2>
         </div>
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-3">
           {STEPS.map((s, i) => (
             <motion.div
               key={s.title}
@@ -172,75 +172,75 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ ...spring, delay: i * 0.08 }}
-              className="rounded-4xl border border-line bg-white p-7 shadow-soft"
+              className="rounded-3xl border border-line bg-white p-5 shadow-soft"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-mist text-brand">
-                <s.icon size={24} />
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-mist text-brand">
+                <s.icon size={20} />
               </span>
-              <h3 className="mt-5 text-xl font-semibold text-ink">{s.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-slatey">{s.body}</p>
+              <h3 className="mt-4 text-base font-semibold text-ink">{s.title}</h3>
+              <p className="mt-1.5 text-[13px] leading-relaxed text-slatey">{s.body}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Care Mode band */}
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="overflow-hidden rounded-5xl border border-line bg-white shadow-card">
+      <section className="mx-auto max-w-5xl px-6 pb-16">
+        <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-card">
           <div className="grid items-center lg:grid-cols-2">
-            <div className="p-8 sm:p-12">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-sm font-medium text-brand-deep">
-                <Heart size={15} /> For the people who can&apos;t protect themselves
+            <div className="p-6 sm:p-8">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-mist px-3 py-1 text-xs font-medium text-brand-deep">
+                <Heart size={14} /> For the people who can&apos;t protect themselves
               </div>
-              <h2 className="text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
-                They do <span className="font-hand text-4xl text-brand sm:text-5xl">nothing</span>.
+              <h2 className="text-2xl font-semibold leading-tight tracking-tight text-ink sm:text-3xl">
+                They do <span className="font-hand text-3xl text-brand sm:text-4xl">nothing</span>.
                 <br /> You set it up once.
               </h2>
-              <p className="mt-4 text-[15px] leading-relaxed text-slatey">
+              <p className="mt-3 text-[14px] leading-relaxed text-slatey">
                 Aegis isn&apos;t one more app your grandmother has to learn. It&apos;s a guardian you
                 set up <em className="not-italic font-medium text-ink">for</em> her — managed from your
                 phone, watching quietly over hers.
               </p>
-              <div className="mt-7 grid gap-3">
+              <div className="mt-5 grid gap-2.5">
                 {CARE.map((c) => (
-                  <div key={c.title} className="flex items-start gap-3 rounded-2xl border border-line bg-haze p-3.5">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-brand shadow-soft">
-                      <c.icon size={17} />
+                  <div key={c.title} className="flex items-start gap-3 rounded-2xl border border-line bg-haze p-3">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-brand shadow-soft">
+                      <c.icon size={16} />
                     </span>
                     <div>
                       <div className="text-sm font-semibold text-ink">{c.title}</div>
-                      <div className="text-sm text-muted">{c.body}</div>
+                      <div className="text-[13px] text-muted">{c.body}</div>
                     </div>
                   </div>
                 ))}
               </div>
               <Link
                 href="/care"
-                className="group mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-semibold text-white shadow-glow transition hover:bg-brand-deep"
+                className="group mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-deep"
               >
                 Set up Care Mode
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
-            <div className="relative h-72 lg:h-full lg:min-h-[34rem]">
+            <div className="relative h-64 lg:h-full lg:min-h-[24rem]">
               <Image
                 src="/images/grandfather-tablet.webp"
                 alt="A grandfather on a video call with his grandchild beside him"
                 fill
+                quality={92}
                 sizes="(max-width:1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent lg:bg-gradient-to-l" />
             </div>
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-line py-10 text-center">
-        <p className="mx-auto max-w-xl font-hand text-2xl text-brand-deep">
+      <footer className="border-t border-line py-8 text-center">
+        <p className="mx-auto max-w-xl font-hand text-xl text-brand-deep">
           Scammers got an AI. It&apos;s time the people we love got one too.
         </p>
-        <p className="eyebrow mt-3">Aegis · Beyond Tomorrow Summit 2026</p>
+        <p className="eyebrow mt-2">Aegis · Beyond Tomorrow Summit 2026</p>
       </footer>
     </main>
   );
@@ -266,55 +266,55 @@ function PhoneMock() {
       transition={{ type: "spring", bounce: 0.3, duration: 1.1, delay: 0.15 }}
       className="animate-float"
     >
-      <div className="relative w-[300px] overflow-hidden rounded-[2.75rem] border border-line bg-gradient-to-b from-white to-mist p-3 shadow-phone">
+      <div className="relative w-[260px] overflow-hidden rounded-[2.25rem] border border-line bg-gradient-to-b from-white to-mist p-2.5 shadow-phone">
         {/* status bar */}
-        <div className="relative flex h-9 items-center justify-between px-4 text-ink">
-          <span className="text-xs font-semibold">9:41</span>
-          <span className="absolute inset-x-0 mx-auto h-5 w-20 rounded-full bg-ink" />
+        <div className="relative flex h-8 items-center justify-between px-3 text-ink">
+          <span className="text-[11px] font-semibold">9:41</span>
+          <span className="absolute inset-x-0 mx-auto h-4 w-16 rounded-full bg-ink" />
           <span className="flex items-center gap-1">
-            <Signal size={13} />
-            <Wifi size={13} />
-            <BatteryFull size={15} />
+            <Signal size={12} />
+            <Wifi size={12} />
+            <BatteryFull size={14} />
           </span>
         </div>
 
         {/* incoming call */}
-        <div className="mt-1 flex items-center gap-3 rounded-2xl bg-white px-3.5 py-3 shadow-soft">
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-danger/10 text-danger">
+        <div className="mt-1 flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-soft">
+          <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-danger/10 text-danger">
             <span className="absolute h-full w-full animate-pulse-ring rounded-full bg-danger/30" />
-            <PhoneIncoming size={18} />
+            <PhoneIncoming size={15} />
           </span>
           <div className="leading-tight">
-            <div className="text-sm font-semibold text-ink">Unknown number</div>
-            <div className="text-xs text-muted">screened by Aegis</div>
+            <div className="text-[13px] font-semibold text-ink">Unknown number</div>
+            <div className="text-[11px] text-muted">screened by Aegis</div>
           </div>
         </div>
 
         {/* transcript bubble */}
-        <div className="mt-3 max-w-[85%] rounded-2xl rounded-bl-md bg-haze px-3.5 py-2.5 text-[13px] leading-snug text-slatey shadow-soft">
-          &ldquo;Grandma, it&apos;s me — I&apos;m in trouble. Don&apos;t tell mom. Wire $4,000 now.&rdquo;
+        <div className="mt-2.5 max-w-[88%] rounded-xl rounded-bl-md bg-haze px-3 py-2 text-[12px] leading-snug text-slatey shadow-soft">
+          &ldquo;Grandma, it&apos;s me — don&apos;t tell mom. Wire $4,000 now.&rdquo;
         </div>
 
         {/* Aegis intervention */}
-        <div className="mt-3 rounded-2xl border border-brand/20 bg-brand/[0.06] p-3.5">
+        <div className="mt-2.5 rounded-xl border border-brand/20 bg-brand/[0.06] p-3">
           <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1.5 text-sm font-semibold text-brand-deep">
-              <ShieldCheck size={16} /> Aegis
+            <span className="flex items-center gap-1.5 text-[13px] font-semibold text-brand-deep">
+              <ShieldCheck size={14} /> Aegis
             </span>
-            <span className="rounded-full bg-danger/12 px-2.5 py-0.5 text-[11px] font-bold text-danger">RISK 94</span>
+            <span className="rounded-full bg-danger/12 px-2 py-0.5 text-[10px] font-bold text-danger">RISK 94</span>
           </div>
-          <p className="mt-2 font-hand text-lg leading-tight text-ink">
+          <p className="mt-1.5 font-hand text-base leading-tight text-ink">
             That&apos;s not your grandson. I paused the transfer and called Sarah — you&apos;re safe.
           </p>
         </div>
 
         {/* status chips */}
-        <div className="mt-3 grid grid-cols-2 gap-2">
-          <div className="flex items-center gap-1.5 rounded-xl bg-white px-3 py-2 text-[12px] font-medium text-ink shadow-soft">
-            <Lock size={13} className="text-danger" /> $4,000 held
+        <div className="mt-2.5 grid grid-cols-2 gap-2">
+          <div className="flex items-center gap-1.5 rounded-lg bg-white px-2.5 py-1.5 text-[11px] font-medium text-ink shadow-soft">
+            <Lock size={12} className="text-danger" /> $4,000 held
           </div>
-          <div className="flex items-center gap-1.5 rounded-xl bg-white px-3 py-2 text-[12px] font-medium text-ink shadow-soft">
-            <Users size={13} className="text-safe" /> Sarah notified
+          <div className="flex items-center gap-1.5 rounded-lg bg-white px-2.5 py-1.5 text-[11px] font-medium text-ink shadow-soft">
+            <Users size={12} className="text-safe" /> Sarah notified
           </div>
         </div>
       </div>

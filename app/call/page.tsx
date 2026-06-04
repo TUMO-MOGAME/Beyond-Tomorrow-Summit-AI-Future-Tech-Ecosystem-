@@ -138,7 +138,7 @@ export default function GuardianCall() {
       </div>
 
       <div className="eyebrow mb-2">Guardian Number · live call screening</div>
-      <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+      <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
         When an unknown number calls.
       </h1>
       <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slatey">

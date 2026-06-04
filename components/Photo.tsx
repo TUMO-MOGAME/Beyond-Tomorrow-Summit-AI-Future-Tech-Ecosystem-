@@ -1,10 +1,9 @@
 import Image from "next/image";
 
 /**
- * Framed photograph. The UI is pure monochrome; the people are what carry
- * warmth — so photos appear in full color inside a hairline frame, with a
- * bottom-up black gradient that ties them into the black theme and keeps any
- * overlaid text legible.
+ * Framed photograph. Shows the image bright and high-quality by default (no
+ * dimming). Pass `overlay="soft"` only when text sits on top and needs a gentle
+ * bottom scrim.
  */
 export default function Photo({
   src,
@@ -13,7 +12,8 @@ export default function Photo({
   imgClassName = "",
   sizes = "100vw",
   priority = false,
-  overlay = "bottom",
+  quality = 90,
+  overlay = "none",
 }: {
   src: string;
   alt: string;
@@ -21,7 +21,8 @@ export default function Photo({
   imgClassName?: string;
   sizes?: string;
   priority?: boolean;
-  overlay?: "bottom" | "full" | "none";
+  quality?: number;
+  overlay?: "none" | "soft";
 }) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -31,13 +32,11 @@ export default function Photo({
         fill
         sizes={sizes}
         priority={priority}
+        quality={quality}
         className={`object-cover ${imgClassName}`}
       />
-      {overlay === "bottom" && (
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
-      )}
-      {overlay === "full" && (
-        <div className="absolute inset-0 bg-ink/45" />
+      {overlay === "soft" && (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent" />
       )}
     </div>
   );
